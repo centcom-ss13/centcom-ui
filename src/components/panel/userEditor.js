@@ -25,10 +25,6 @@ class UsersEditor extends React.Component {
   isLoading() {
     return this.props.users === undefined ||
       this.props.loadingUsers ||
-      this.props.userPermissions === undefined ||
-      this.props.loadingUserPermissions ||
-      this.props.userGroups === undefined ||
-      this.props.loadingUserGroups ||
       this.props.permissions === undefined ||
       this.props.loadingPermissions ||
       this.props.groups === undefined ||
@@ -37,9 +33,7 @@ class UsersEditor extends React.Component {
 
   refresh() {
     this.props.fetch('users');
-    this.props.fetch('userPermissions');
     this.props.fetch('permissions');
-    this.props.fetch('userGroups');
     this.props.fetch('groups');
   }
 
@@ -70,7 +64,7 @@ class UsersEditor extends React.Component {
       return (<LoadingIndicator center/>);
     }
 
-    const userPermissionItems = this.props.userPermissions
+    const userPermissionItems = [] //TODO: jank
     .filter(userPermission => userPermission.user_id === object.id);
 
     return (
@@ -91,15 +85,15 @@ class UsersEditor extends React.Component {
       return (<LoadingIndicator center/>);
     }
 
-    const userPermissionItems = this.props.userGroups
-    .filter(userPermission => userPermission.user_id === object.id);
+    const userGroupItems = [] //TODO: jank
+    .filter(userGroup => userGroup.user_id === object.id);
 
     return (
       <List
         header={<div>Groups:</div>}
         key="userGroups"
         bordered
-        dataSource={userPermissionItems}
+        dataSource={userGroupItems}
         className="userGroupsContentContainer"
         locale={{	emptyText: 'No Groups' }}
         renderItem={({ permission_id, description }) => (<List.Item key={permission_id} value={permission_id}>{description}</List.Item>)}
@@ -141,10 +135,6 @@ const mapStateToProps = (state) => {
   return {
     users: state.app.users,
     loadingUsers: state.app.loading.users,
-    userGroups: state.app.userGroups,
-    loadingUserGroups: state.app.loading.userGroups,
-    userPermissions: state.app.userPermissions,
-    loadingUserPermissions: state.app.loading.userPermissions,
     groups: state.app.groups,
     loadingGroups: state.app.loading.groups,
     permissions: state.app.permissions,

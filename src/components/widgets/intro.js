@@ -49,9 +49,9 @@ class Intro extends React.Component {
     return (
       <div className="panelIntro">
         <h1 style={{ fontSize: '35px' }}>{this.props.config.panel_home_intro_text}</h1>
-        <a href={`byond://${mainServer.url}:${mainServer.port}`}>
+        {mainServer && <a href={`byond://${mainServer.url}:${mainServer.port}`}>
           <Button type="primary" style={{ margin: '10px' }}>Join Server!</Button>
-        </a>
+        </a>}
       </div>
     );
   }

@@ -50,12 +50,16 @@ class ServerBroker {
     body = undefined,
     headers = {},
   } = {}) {
+    const finalHeaders = {
+      ...headers,
+      ...((method === 'POST' || method === 'PUT') && { 'Content-Type': 'application/json' }),
+    };
     return new Promise((resolve, reject) => {
       xhr({
         uri: `${this.serverUrl}${queryString}`,
         method,
         body,
-        headers,
+        headers: finalHeaders,
       }, (err, results) => {
         const finalError = err || isErrorCode(results.statusCode);
         if(finalError) {
