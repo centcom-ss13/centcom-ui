@@ -1,4 +1,3 @@
-import terraformOutput from '../../../generated/terraform_output';
 import xhr from 'xhr';
 import {isErrorCode} from "../utils/statusCodes";
 import CrudEndpointSet from "./crudEndpointSet";
@@ -6,7 +5,7 @@ import endpointDefinitions from '../defs/endpoints';
 
 class ServerBroker {
   constructor() {
-    this.serverUrl = terraformOutput.server_url.value;
+    this.serverUrl = 'http://localhost:3000'; //TODO: Temporary fix because I'm lazy
 
     this.endpoints = Object.entries(endpointDefinitions)
     .map(([key, endpointDefinition]) => ({ [key]: new CrudEndpointSet(this, endpointDefinition) }))

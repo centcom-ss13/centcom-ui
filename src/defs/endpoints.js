@@ -1,7 +1,3 @@
-import getUserPermissions from '../sql/get/userPermissions.sql';
-import getUserGroups from '../sql/get/userGroups.sql';
-import editUserPermissions from '../sql/update/userPermissions.sql';
-
 export default {
   books: {
     path: '/books',
@@ -161,7 +157,6 @@ export default {
         matchIndex: 1,
       }
     },
-    overrideGetSql: getUserPermissions,
     postTransform: (objects) => objects.map(permission_id => ({ permission_id })),
     bulkUpdate: true, //must have a SINGLE filter field to work (and a SINGLE matcher in the path)
   },
@@ -208,7 +203,6 @@ export default {
         matchIndex: 1,
       }
     },
-    overrideGetSql: getUserGroups,
     postTransform: (objects) => objects.map(group_id => ({ group_id })),
     bulkUpdate: true, //must have a SINGLE filter field to work (and a SINGLE matcher in the path)
   },
