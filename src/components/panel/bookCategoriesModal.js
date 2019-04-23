@@ -27,7 +27,7 @@ class BookCategoriesModal extends React.Component {
     const updateBookCategories = this.state.bookCategories.filter(category =>
       this.props.bookCategories.map(dbCategory => dbCategory.id).includes(category.id));
     const newBookCategories = this.state.bookCategories.filter(category =>
-      this.props.bookCategories === undefined.map(dbCategory => dbCategory.id).includes(category.id));
+      !this.props.bookCategories.map(dbCategory => dbCategory.id).includes(category.id));
 
     const updatePromise = Promise.all(updateBookCategories.map(((obj) => db.update.call(db, 'bookCategories', obj))));
     const createPromise = Promise.all(newBookCategories.map(((obj) => db.create.call(db, 'bookCategories', obj))));
