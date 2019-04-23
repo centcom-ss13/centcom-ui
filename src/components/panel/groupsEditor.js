@@ -1,10 +1,12 @@
 import React from 'react';
-import {Menu, Input} from "antd";
+import {Menu, Input, List} from "antd";
 import {connect} from 'react-redux'
 import actions from '../../actions/index';
 import DB from '../../brokers/serverBroker';
 import EditableList from './editableList';
 import {sortAlphabeticalByKey} from "../../utils/sorters";
+import GroupPermissionsEditor from './groupPermissions/editor';
+import LoadingIndicator from "../loadingIndicator";
 
 const db = new DB();
 
@@ -24,11 +26,15 @@ class GroupsEditor extends React.Component {
   }
 
   isLoading() {
-    return this.props.groups === undefined || this.props.loadingGroups;
+    return this.props.groups === undefined ||
+      this.props.loadingGroups ||
+      this.props.permissions === undefined ||
+      this.props.loadingPermissions;
   }
 
   refresh() {
     this.props.fetch('groups');
+    this.props.fetch('permissions');
   }
 
   getMenuItems(groups) {
@@ -37,8 +43,41 @@ class GroupsEditor extends React.Component {
     .map(group => (<Menu.Item key={group.id}>{group.name}</Menu.Item>));
   }
 
+  renderEditPermissions(input, setInputHandler) {
+    if(this.isLoading()) {
+      return (<LoadingIndicator center/>);
+    }
+
+    return (<GroupPermissionsEditor group={input} setInputHandler={setInputHandler} />);
+  }
+
+  renderDisplayPermissions(object) {
+    if(this.isLoading()) {
+      return (<LoadingIndicator center/>);
+    }
+
+    const groupPermissionItems = this.props.permissions
+    .filter(({ id }) => object.permissions.includes(id));
+
+    return (
+      <List
+        header={<div>Group Permissions:</div>}
+        key="groupPermissions"
+        bordered
+        dataSource={groupPermissionItems}
+        className="groupPermissionsContentContainer"
+        locale={{	emptyText: 'No Permissions' }}
+        renderItem={({ id, description }) => (<List.Item key={id} value={id}>{description}</List.Item>)}
+      />
+    );
+  }
+
   getFields() {
     return {
+      permissions: {
+        renderEdit: this.renderEditPermissions.bind(this),
+        renderDisplay: this.renderDisplayPermissions.bind(this),
+      }
     }
   }
 
@@ -63,6 +102,8 @@ const mapStateToProps = (state) => {
   return {
     groups: state.app.groups,
     loadingGroups: state.app.loading.groups,
+    permissions: state.app.permissions,
+    loadingPermissions: state.app.loading.permissions,
   }
 };
 

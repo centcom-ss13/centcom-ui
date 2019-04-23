@@ -48,7 +48,7 @@ class UsersEditor extends React.Component {
       return (<LoadingIndicator center/>);
     }
 
-    return (<UserPermissionsEditor user_id={input.id} setInputHandler={setInputHandler} />);
+    return (<UserPermissionsEditor user={input} setInputHandler={setInputHandler} />);
   }
 
   renderEditGroups(input, setInputHandler) {
@@ -56,7 +56,7 @@ class UsersEditor extends React.Component {
       return (<LoadingIndicator center/>);
     }
 
-    return (<UserGroupsEditor user_id={input.id} setInputHandler={setInputHandler} />);
+    return (<UserGroupsEditor user={input} setInputHandler={setInputHandler} />);
   }
 
   renderDisplayPermissions(object) {
@@ -64,8 +64,8 @@ class UsersEditor extends React.Component {
       return (<LoadingIndicator center/>);
     }
 
-    const userPermissionItems = [] //TODO: jank
-    .filter(userPermission => userPermission.user_id === object.id);
+    const userPermissionItems = this.props.permissions
+    .filter(({ id }) => object.permissions.includes(id));
 
     return (
       <List
@@ -75,7 +75,7 @@ class UsersEditor extends React.Component {
         dataSource={userPermissionItems}
         className="userPermissionsContentContainer"
         locale={{	emptyText: 'No Permissions' }}
-        renderItem={({ permission_id, description }) => (<List.Item key={permission_id} value={permission_id}>{description}</List.Item>)}
+        renderItem={({ id, description }) => (<List.Item key={id} value={id}>{description}</List.Item>)}
       />
     );
   }
@@ -85,8 +85,8 @@ class UsersEditor extends React.Component {
       return (<LoadingIndicator center/>);
     }
 
-    const userGroupItems = [] //TODO: jank
-    .filter(userGroup => userGroup.user_id === object.id);
+    const userGroupItems = this.props.groups
+    .filter(({ id }) => object.groups.includes(id));
 
     return (
       <List

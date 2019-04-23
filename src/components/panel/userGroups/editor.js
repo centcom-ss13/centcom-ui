@@ -13,9 +13,7 @@ class UserGroupsEditor extends React.Component {
   }
 
   componentDidMount() {
-    const chosenKeys = this.props.userGroups
-    .filter(({ user_id }) => this.props.user_id === user_id)
-    .map(({ group_id }) => group_id);
+    const chosenKeys = this.props.user.groups;
     this.setState({
       chosenKeys,
       availableKeys: this.getAvailableKeys(chosenKeys),
@@ -56,7 +54,7 @@ class UserGroupsEditor extends React.Component {
   }
 
   isLoading() {
-    return this.props.groups === undefined || this.props.loadingGroups || this.props.userGroups === undefined || this.props.loadingUserGroups || this.props.user_id === undefined;
+    return this.props.groups === undefined || this.props.loadingGroups || this.props.user === undefined;
   }
 
   render() {
@@ -93,8 +91,6 @@ const mapStateToProps = (state) => {
   return {
     users: state.app.users,
     loadingUsers: state.app.loading.users,
-    userGroups: state.app.userGroups,
-    loadingUserGroups: state.app.loading.userGroups,
     groups: state.app.groups,
     loadingGroups: state.app.loading.groups,
   }

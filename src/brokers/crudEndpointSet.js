@@ -8,16 +8,14 @@ export default class CrudEndpointSet {
     const endpointParams = this.endpointDefinition.params || [];
 
     let defPath;
-    if(method === 'GET' && this.endpointDefinition.uiGetPath) {
-      defPath = this.endpointDefinition.uiGetPath;
-    } else if(method === 'PUT' && this.endpointDefinition.uiPutPath) {
-      defPath = this.endpointDefinition.uiPutPath;
-    } else if(method === 'POST' && this.endpointDefinition.uiPostPath) {
-      defPath = this.endpointDefinition.uiPostPath;
-    } else if(method === 'DELETE' && this.endpointDefinition.uiDeletePath) {
-      defPath = this.endpointDefinition.uiDeletePath;
-    } else if(this.endpointDefinition.uiPath) {
-      defPath = this.endpointDefinition.uiPath;
+    if(method === 'GET' && this.endpointDefinition.getPath) {
+      defPath = this.endpointDefinition.getPath;
+    } else if(method === 'PUT' && this.endpointDefinition.putPath) {
+      defPath = this.endpointDefinition.putPath;
+    } else if(method === 'POST' && this.endpointDefinition.postPath) {
+      defPath = this.endpointDefinition.postPath;
+    } else if(method === 'DELETE' && this.endpointDefinition.deletePath) {
+      defPath = this.endpointDefinition.deletePath;
     } else {
       defPath = this.endpointDefinition.path;
     }
