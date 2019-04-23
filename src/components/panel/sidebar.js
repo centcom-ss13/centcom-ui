@@ -46,7 +46,7 @@ class PageSidebar extends React.Component {
         collapsed={this.state.collapsed}
         onCollapse={this.onCollapse.bind(this)}
         style={style}
-        width={200}
+        width={250}
       >
         <div className="logo" />
         <Spin spinning={this.isLoading()} wrapperClassName="sidebar-loading-container">
