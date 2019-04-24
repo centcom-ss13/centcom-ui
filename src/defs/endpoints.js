@@ -169,4 +169,115 @@ export default {
       },
     ],
   },
+  jobs: {
+    path: '/jobs',
+    name: 'jobs',
+    singularDisplayName: 'job',
+    fields: {
+      title: {
+        type: 'STRING',
+        name: 'Job Title',
+        menuKey: true, //must be the only field with menuKey
+        displayOrder: 1,
+      },
+      aggregate: {
+        type: 'NO_DISPLAY',
+        name: 'Aggregate Group',
+      },
+    }
+  },
+  bans: {
+    path: '/bans',
+    name: 'bans',
+    singularDisplayName: 'ban',
+    fields: {
+      byond_key: {
+        type: 'STRING',
+        name: 'BYOND CKey',
+        menuKey: true,
+        displayOrder: 1,
+      },
+      reason: {
+        type: 'LONG_STRING',
+        name: 'Ban Reason',
+        displayOrder: 2,
+      },
+      expiration_date: {
+        type: 'STRING',
+        name: 'Ban Expiration Date',
+        displayOrder: 3,
+      },
+      ip: {
+        type: 'STRING',
+        name: 'IP',
+        displayOrder: 4,
+      },
+      computer_id: {
+        type: 'STRING',
+        name: 'Computer ID',
+        displayOrder: 5,
+      },
+      issuer_id: {
+        type: 'NO_DISPLAY',
+        name: 'Ban Issuer User ID'
+      },
+      jobs: {
+        type: 'NO_DISPLAY', //TODO: Display this with a custom tag thing
+        name: 'Job Bans',
+      }
+    }
+  },
+  userThemes: {
+    path: '/users/:userId/theme',
+    name: 'User Theme',
+    singularDisplayName: 'Preference',
+    params: {
+      userId: {
+        matchIndex: 1,
+      }
+    },
+    fields: {
+      theme_name: {
+        type: 'STRING_READONLY', //TODO: Add this type
+        name: 'Preference',
+        menuKey: true,
+        displayOrder: 1,
+      },
+      description: {
+        type: 'STRING',
+        name: 'Description',
+        displayOrder: 2,
+      },
+      theme_value: {
+        type: 'LONG_STRING',
+        name: 'Value',
+        editHelpText: '(leave blank for default)',
+        displayOrder: 3,
+      }
+    }
+  },
+  themes: {
+    path: '/themes',
+    name: 'User Preferences',
+    singularDisplayName: 'Preference',
+    fields: {
+      theme_name: {
+        type: 'STRING',
+        name: 'Theme Name',
+        menuKey: true,
+        displayOrder: 1,
+      },
+      description: {
+        type: 'STRING',
+        name: 'Description',
+        displayOrder: 2,
+      },
+      default_value: {
+        type: 'LONG_STRING',
+        name: 'Default Value',
+        displayOrder: 3,
+      }
+    }
+  }
+
 }

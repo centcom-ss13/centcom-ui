@@ -86,6 +86,12 @@ class PageSidebar extends React.Component {
                 <span>Book Viewer</span>
               </Link>
             </Menu.Item>
+            <Menu.Item key={`/panel/bans`}>
+              <Link to={`/panel/bans`}>
+                {/*<Icon type="book" />*/}
+                <span>Ban Viewer</span>
+              </Link>
+            </Menu.Item>
             <SubMenu
               key="admin_menu"
               title={<span><Icon type="pie-chart" /><span>Admin</span></span>}
@@ -100,6 +106,18 @@ class PageSidebar extends React.Component {
                 <Link to={`/panel/admin/book`}>
                   <Icon type="book" />
                   <span>Book Editor</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key={`/panel/admin/bans`}>
+                <Link to={`/panel/admin/bans`}>
+                  {/*<Icon type="book" />*/}
+                  <span>Ban Manager</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key={`/panel/admin/jobs`}>
+                <Link to={`/panel/admin/jobs`}>
+                  {/*<Icon type="book" />*/}
+                  <span>Job Editor</span>
                 </Link>
               </Menu.Item>
               <Menu.Item key={`/panel/admin/permissions`}>

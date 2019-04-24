@@ -3,13 +3,16 @@ import { Route, Switch, withRouter } from "react-router";
 
 import Home from '../pages/home';
 import Admin from '../pages/admin';
-import { wrapWithBreadcrumbs } from "../../utils/breadcrumbs";
+import { wrapWithBreadcrumbs } from "../modules/breadcrumbs";
 import ErrorPage404 from "../../error/ErrorPage404";
 import BookEditor from "../pages/bookEditor";
 import BookViewer from "../pages/bookViewer";
 import PermissionsEditor from "../pages/permissionsEditor";
 import GroupsEditor from "../pages/groupsEditor";
 import UserEditor from "../pages/userEditor";
+import BanEditor from "../pages/banEditor";
+import BanViewer from "../pages/banViewer";
+import JobsEditor from "../pages/jobsEditor";
 
 class PageSwitcher extends React.Component {
   render() {

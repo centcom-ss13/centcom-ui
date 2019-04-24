@@ -2,7 +2,7 @@ import React from "react";
 import {Link, withRouter} from "react-router-dom";
 import {Breadcrumb} from "antd";
 import {connect} from "react-redux";
-import actions from "../actions/index";
+import actions from "../../actions/index";
 
 const breadcrumbStyle = {
   paddingBottom: '20px',
@@ -18,11 +18,14 @@ class BreadcrumbWrapper extends React.Component {
     let breadcrumbNameMap = {
       '/panel': 'Home',
       '/panel/admin': 'Admin',
-      '/panel/admin/book': 'Book Manager',
+      '/panel/admin/book': 'Book Editor',
       '/panel/admin/permissions': 'Permissions Manager',
       '/panel/admin/users': 'User Manager',
       '/panel/book': 'Book Viewer',
       '/panel/admin/groups': 'Group Manager',
+      '/panel/admin/bans': 'Ban Manager',
+      '/panel/bans': 'Ban Viewer',
+      '/panel/admin/jobs': 'Job Editor',
     };
 
     if(this.props.config && this.props.config.community_name) {
