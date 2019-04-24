@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Row, Col, Card, Divider, Icon, Spin, Skeleton} from "antd";
+import {Row, Col, Card, Divider, Spin, Skeleton} from "antd";
 import TwitterIcon from "../../icons/twitterIcon";
 import SteamIcon from "../../icons/steamIcon";
 import DiscordIcon from "../../icons/discordIcon";

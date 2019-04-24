@@ -1,6 +1,5 @@
 import React from 'react';
 import {Table, Col, Card, Button, Spin} from "antd";
-import {withRouter} from "react-router";
 import {connect} from "react-redux";
 import actions from "../../../actions/index";
 

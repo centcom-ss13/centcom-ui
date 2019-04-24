@@ -1,11 +1,11 @@
 import React from 'react';
-import {Button, Layout, Menu, Affix, Popconfirm, message, Icon, Input } from "antd";
-import { textSearch } from '../../../utils/fuzzyMatcher';
-import LoadingIndicator from "../../loadingIndicator";
-import DB from '../../../brokers/serverBroker';
+import {Button, Layout, Menu, Affix, Popconfirm, message, Icon, Input} from "antd";
+import {textSearch} from '../../utils/fuzzyMatcher';
+import LoadingIndicator from "../modules/loadingIndicator";
+import DB from '../../brokers/serverBroker';
 
-import endpointDefinitions from '../../../defs/endpoints';
-import { sortNumericallyByKey } from '../../../utils/sorters';
+import endpointDefinitions from '../../defs/endpoints';
+import {sortNumericallyByKey} from '../../utils/sorters';
 
 const db = new DB();
 
@@ -46,7 +46,7 @@ export default class EditableList extends React.Component {
       );
     }
 
-    if(this.props.displayOnly) {
+    if (this.props.displayOnly) {
       return (<div className="editableListContentContainer" ref={this.contentContainer}>
         {this.displayContent()}
       </div>);
@@ -67,7 +67,8 @@ export default class EditableList extends React.Component {
           {!this.state.editing && !this.state.creating &&
           <Button className="button" type="primary" onClick={this.startEdit.bind(this)}>Edit</Button>}
           {!this.state.creating && this.state.selectedKey &&
-          <Popconfirm title={`Are you sure delete this ${this.getEndpointDef().singularDisplayName}?`} onConfirm={this.delete.bind(this)}
+          <Popconfirm title={`Are you sure delete this ${this.getEndpointDef().singularDisplayName}?`}
+                      onConfirm={this.delete.bind(this)}
                       onCancel={this.cancelDelete.bind(this)} okText="Delete" cancelText="Cancel">
             <Button className="button" type="danger" onClick={this.startDelete.bind(this)}>Delete</Button>
           </Popconfirm>}
@@ -80,11 +81,11 @@ export default class EditableList extends React.Component {
 
   setInput(key, value) {
     this.setState({
-      input: {
-        ...this.state.input,
-        [key]: value,
-      }
-    });
+                    input: {
+                      ...this.state.input,
+                      [key]: value,
+                    }
+                  });
   }
 
   setInputs(input) {
@@ -102,11 +103,11 @@ export default class EditableList extends React.Component {
     .map(([key, value]) => ({ ...value, key }))
     .sort(sortNumericallyByKey('displayOrder', 9999))
     .map(({ key, type, custom, name, renderEdit }) => {
-      if(custom && renderEdit) {
+      if (custom && renderEdit) {
         return renderEdit(this.state.input, this.setInput.bind(this));
       }
 
-      if(type === 'STRING') {
+      if (type === 'STRING') {
         const value = this.state.input[key];
         return (
           <div key={key} className="section">
@@ -124,7 +125,7 @@ export default class EditableList extends React.Component {
         );
       }
 
-      if(type === 'LONG_STRING') {
+      if (type === 'LONG_STRING') {
         return (
           <div key={key} className="content section">
             <span className="bold">
@@ -140,7 +141,7 @@ export default class EditableList extends React.Component {
         );
       }
 
-      if(type === 'NO_DISPLAY') {
+      if (type === 'NO_DISPLAY') {
         return null;
       }
 
@@ -180,11 +181,11 @@ export default class EditableList extends React.Component {
     .map(([key, value]) => ({ ...value, key }))
     .sort(sortNumericallyByKey('displayOrder', 9999))
     .map(({ key, type, custom, name, renderDisplay }) => {
-      if(custom && renderDisplay) {
+      if (custom && renderDisplay) {
         return renderDisplay(object);
       }
 
-      if(type === 'STRING' || type === 'LONG_STRING') {
+      if (type === 'STRING' || type === 'LONG_STRING') {
         const value = object[key];
         return (
           <div key={key} className="section" style={{ fontStyle: value ? 'normal' : 'italic' }}>
@@ -194,7 +195,7 @@ export default class EditableList extends React.Component {
         );
       }
 
-      if(type === 'NO_DISPLAY') {
+      if (type === 'NO_DISPLAY') {
         return null;
       }
 
@@ -250,11 +251,11 @@ export default class EditableList extends React.Component {
     const object = this.getObject(this.state.selectedKey);
 
     this.setState({
-      editing: true,
-      input: {
-        ...object,
-      },
-    });
+                    editing: true,
+                    input: {
+                      ...object,
+                    },
+                  });
   }
 
   async edit() {
@@ -310,12 +311,12 @@ export default class EditableList extends React.Component {
 
   startCreate() {
     this.setState({
-      creating: true,
-      input: {},
-      editing: false,
-      deleting: false,
-      selectedKey: undefined
-    });
+                    creating: true,
+                    input: {},
+                    editing: false,
+                    deleting: false,
+                    selectedKey: undefined
+                  });
   }
 
   cancel() {
@@ -344,7 +345,7 @@ export default class EditableList extends React.Component {
         <Sider width={250} style={{ background: '#fff', overflowY: 'auto', }}>
           <div className="editableListCreateButtonContainer">
             {!this.props.displayOnly && <Button key="create" type="primary" className="editableListCreateButton"
-                    onClick={this.startCreate.bind(this)}>Create</Button>}
+                                                onClick={this.startCreate.bind(this)}>Create</Button>}
             {!this.props.displayOnly && this.props.renderHeaderButtons()}
             <Button key="refresh" className="refreshButton" onClick={this.props.refresh.bind(this)}><Icon type="redo"/></Button>
           </div>

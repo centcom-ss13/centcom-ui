@@ -1,10 +1,9 @@
 import React from 'react';
-import {Layout, Menu, Icon, Spin,} from 'antd';
+import {Layout, Menu, Icon, Spin} from 'antd';
 import {Link} from "react-router-dom";
 import {withRouter} from "react-router";
-import PageHeader from "./header";
 import {connect} from "react-redux";
-import actions from "../../../actions/index";
+import actions from "../../actions/index";
 
 const {
   Sider,

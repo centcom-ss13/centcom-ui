@@ -1,18 +1,14 @@
 import React from 'react';
-import {Button, Menu, Input, Select} from "antd";
+import {Button, Menu, Select} from "antd";
 import striptags from 'striptags';
 import {connect} from 'react-redux'
-import actions from '../../../actions/index';
-import DB from '../../../brokers/serverBroker';
+import actions from '../../actions/index';
 import BookCategoriesModal from '../sections/bookCategoriesModal';
 import EditableList from '../modules/editableList';
-import {sortAlphabeticalByKey} from "../../../utils/sorters";
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import {sortAlphabeticalByKey} from "../../utils/sorters";
+import ReactHtmlParser from 'react-html-parser';
 
-const db = new DB();
 const SubMenu = Menu.SubMenu;
-
-const { TextArea } = Input;
 
 class BookList extends React.Component {
   constructor(props) {

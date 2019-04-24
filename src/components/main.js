@@ -1,5 +1,4 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
 import RootContainer from "./rootContainer";
 import configureStore, {history} from './store';
 import {Provider} from "react-redux";

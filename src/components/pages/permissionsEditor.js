@@ -1,12 +1,9 @@
 import React from 'react';
-import {Menu, Input} from "antd";
+import {Menu} from "antd";
 import {connect} from 'react-redux'
-import actions from '../../../actions/index';
-import DB from '../../../brokers/serverBroker';
+import actions from '../../actions/index';
 import EditableList from '../modules/editableList';
-import {sortAlphabeticalByKey} from "../../../utils/sorters";
-
-const db = new DB();
+import {sortAlphabeticalByKey} from "../../utils/sorters";
 
 class PermissionsEditor extends React.Component {
   constructor(props) {

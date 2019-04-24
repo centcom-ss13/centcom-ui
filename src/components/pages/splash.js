@@ -1,6 +1,4 @@
 import React from 'react';
-import {Button} from "antd";
-import {Link} from "react-router-dom";
 import LoadingIndicator from "../modules/loadingIndicator";
 import { connect } from 'react-redux'
 import actions from "../../actions/index";

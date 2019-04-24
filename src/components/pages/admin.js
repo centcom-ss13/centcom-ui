@@ -3,9 +3,9 @@ import React from 'react';
 require('@babel/polyfill');
 
 import {Row} from "antd";
-import ServerDetails from "../../widgets/serverDetails";
-import Servers from "../../widgets/servers";
-import Statistics from "../../widgets/statistics";
+import ServerDetails from "../modules/widgets/serverDetails";
+import Servers from "../modules/widgets/servers";
+import Statistics from "../modules/widgets/statistics";
 
 const containerStyle = {
   minWidth: '300px',

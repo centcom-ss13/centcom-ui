@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout, Modal, Menu, Button, Popconfirm, Input, Affix, Icon} from "antd";
+import {Layout, Modal, Menu, Button, Popconfirm, Input, Icon} from "antd";
 import actions from "../../actions/index";
 import {connect} from "react-redux";
 import LoadingIndicator from "../modules/loadingIndicator";

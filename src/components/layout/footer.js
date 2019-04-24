@@ -1,7 +1,7 @@
 import React from 'react';
 import {Layout, Spin} from 'antd';
 import {connect} from "react-redux";
-import actions from "../../../actions/index";
+import actions from "../../actions/index";
 
 const {
   Footer,

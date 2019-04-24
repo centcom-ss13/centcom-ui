@@ -1,7 +1,6 @@
 import React from 'react';
-import {Layout, DatePicker, Breadcrumb} from 'antd';
-import {Link} from "react-router-dom";
-import PageSwitcher from "../pageSwitcher";
+import {Layout} from 'antd';
+import PageSwitcher from "../routes/pageSwitcher";
 
 const {
   Content,

@@ -1,14 +1,11 @@
 import React from 'react';
-import {Menu, Input, List} from "antd";
+import {Menu, List} from "antd";
 import {connect} from 'react-redux'
-import actions from '../../../actions/index';
-import DB from '../../../brokers/serverBroker';
+import actions from '../../actions/index';
 import EditableList from '../modules/editableList';
-import {sortAlphabeticalByKey} from "../../../utils/sorters";
+import {sortAlphabeticalByKey} from "../../utils/sorters";
 import GroupPermissionsEditor from '../sections/groupPermissions/editor';
-import LoadingIndicator from "../../loadingIndicator";
-
-const db = new DB();
+import LoadingIndicator from "../modules/loadingIndicator";
 
 class GroupsEditor extends React.Component {
   constructor(props) {

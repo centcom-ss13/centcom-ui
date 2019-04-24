@@ -1,13 +1,10 @@
 import React from 'react';
 import {Route, Switch} from "react-router";
 import ErrorPage404 from "../error/ErrorPage404";
-import Panel from './routes/panel';
+import Panel from './layout/panel';
 import Splash from './pages/splash';
-import DB from '../brokers/serverBroker';
 import actions from "../actions/index";
 import {connect} from "react-redux";
-
-const db = new DB();
 
 class RootContainer extends React.Component {
   constructor(props) {

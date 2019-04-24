@@ -1,12 +1,14 @@
 import React from 'react';
 import {Row} from "antd";
-import ServerDetails from "../../widgets/serverDetails";
-import Statistics from "../../widgets/statistics";
-import AboutUs from "../../widgets/aboutUs";
-import Intro from "../../widgets/intro";
+import ServerDetails from "../modules/widgets/serverDetails";
+import Statistics from "../modules/widgets/statistics";
+import AboutUs from "../modules/widgets/aboutUs";
+import Intro from "../modules/widgets/intro";
+
 const containerStyle = {
   minWidth: '300px',
 };
+
 export default class Home extends React.Component {
 
   constructor(props) {

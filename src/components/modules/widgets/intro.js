@@ -1,6 +1,5 @@
 import React from 'react';
-import {Button, Col, Card, Row, Divider, Spin} from "antd";
-import {Link} from "react-router-dom";
+import {Button, Col, Row, Divider, Spin} from "antd";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 import actions from "../../../actions/index";

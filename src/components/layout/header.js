@@ -1,6 +1,6 @@
 import React from 'react';
-import {Layout, DatePicker, Spin} from 'antd';
-import actions from "../../../actions/index";
+import {Layout, Spin} from 'antd';
+import actions from "../../actions/index";
 import {connect} from "react-redux";
 
 const {
