@@ -181,9 +181,16 @@ export default {
         displayOrder: 1,
       },
       aggregate: {
-        type: 'NO_DISPLAY',
-        name: 'Aggregate Group',
+        type: 'TOGGLE',
+        name: 'Aggregate Job',
+        displayOrder: 2,
       },
+      childJobIds: {
+        type: 'CUSTOM',
+        name: 'Child Jobs',
+        custom: true,
+        displayOrder: 3,
+      }
     }
   },
   bans: {

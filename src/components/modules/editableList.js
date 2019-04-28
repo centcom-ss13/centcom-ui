@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Layout, Menu, Affix, Popconfirm, message, Icon, Input} from "antd";
+import {Button, Layout, Menu, Affix, Popconfirm, message, Icon, Input, Checkbox} from "antd";
 import {textSearch} from '../../utils/fuzzyMatcher';
 import LoadingIndicator from "../modules/loadingIndicator";
 import DB from '../../brokers/serverBroker';
@@ -141,6 +141,19 @@ export default class EditableList extends React.Component {
         );
       }
 
+      if (type === 'TOGGLE') {
+        const value = this.state.input[key];
+        return (
+          <div key={key} className="section">
+            <Checkbox onChange={(e) => this.setInput(key, e.target.checked)} defaultChecked={value}>
+              <span className="bold">
+                {name}
+              </span>
+            </Checkbox>
+          </div>
+        );
+      }
+
       if (type === 'NO_DISPLAY') {
         return null;
       }
@@ -191,6 +204,19 @@ export default class EditableList extends React.Component {
           <div key={key} className="section" style={{ fontStyle: value ? 'normal' : 'italic' }}>
             <span className="bold">{name}:</span>
             <pre>{value || 'none'}</pre>
+          </div>
+        );
+      }
+
+      if (type === 'TOGGLE') {
+        const value = object[key];
+        return (
+          <div key={key} className="section">
+            <Checkbox disabled checked={value}>
+              <span className="bold">
+                {name}
+              </span>
+            </Checkbox>
           </div>
         );
       }
