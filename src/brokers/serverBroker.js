@@ -5,7 +5,7 @@ import endpointDefinitions from '../defs/endpoints';
 
 class ServerBroker {
   constructor() {
-    this.serverUrl = 'http://centcom.ddmers.com:3000'; //TODO: Temporary fix because I'm lazy
+    this.serverUrl = 'https://centcom.ddmers.com:3000'; //TODO: Temporary fix because I'm lazy
 
     this.endpoints = Object.entries(endpointDefinitions)
     .map(([key, endpointDefinition]) => ({ [key]: new CrudEndpointSet(this, endpointDefinition) }))
