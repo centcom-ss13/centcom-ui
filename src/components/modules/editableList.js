@@ -262,7 +262,12 @@ export default class EditableList extends React.Component {
   }
 
   async performEdit(object) {
-    return await Promise.all(db.update(this.props.defKey, object, [this.state.selectedKey]));
+    const parsedObject = {
+      ...object,
+      id: parseInt(object.id, 10),
+    };
+
+    return await Promise.all(db.update(this.props.defKey, parsedObject, [this.state.selectedKey]));
   }
 
   async performCreate(object) {

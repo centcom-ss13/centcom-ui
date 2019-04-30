@@ -40,12 +40,16 @@ class ChildJobsEditor extends React.Component {
 
   getAvailableKeys(chosenKeys = this.state.chosenKeys) {
     return this.props.jobs
+    .filter(({ aggregate }) => !aggregate)
+    .filter(({ id }) => id !== this.props.parentJob.id)
     .map(({ id }) => id)
     .filter((id) => !chosenKeys.includes(id));
   }
 
   getChosenKeysFromAvailableKeys(availableKeys) {
     return this.props.jobs
+    .filter(({ aggregate }) => !aggregate)
+    .filter(({ id }) => id !== this.props.parentJob.id)
     .map(({ id }) => id)
     .filter((id) => !availableKeys.includes(id));
   }
@@ -56,6 +60,8 @@ class ChildJobsEditor extends React.Component {
 
   render() {
     const allJobs = this.props.jobs
+    .filter(({ aggregate }) => !aggregate)
+    .filter(({ id }) => id !== this.props.parentJob.id)
     .map((job) => ({ ...job, key: job.id }));
 
     return (

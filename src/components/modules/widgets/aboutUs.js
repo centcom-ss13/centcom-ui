@@ -65,12 +65,6 @@ class AboutUs extends React.Component {
     return (
       <React.Fragment>
         Put some stuff here!<br />
-        <br />
-        Current Council Members:<br />
-        Xantam, Colburn3000, BritishGrace, Yogurtshrimp69, OakBoscage<br />
-        <br />
-        Host: Xantam<br />
-        Head Coders: Altoids0, Monster860<br />
       </React.Fragment>
     );
   }
