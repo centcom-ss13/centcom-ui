@@ -13,6 +13,7 @@ import UserEditor from "../pages/userEditor";
 import BanEditor from "../pages/banEditor";
 import BanViewer from "../pages/banViewer";
 import JobsEditor from "../pages/jobsEditor";
+import DonationTierViewer from "../pages/donationTierViewer";
 
 class PageSwitcher extends React.Component {
   render() {
@@ -28,6 +29,7 @@ class PageSwitcher extends React.Component {
           <Route path={`/panel/admin/bans`} component={wrapWithBreadcrumbs(BanEditor)}/>
           <Route path={`/panel/bans`} component={wrapWithBreadcrumbs(BanViewer)}/>
           <Route path={`/panel/admin`} component={wrapWithBreadcrumbs(Admin)}/>
+          <Route path={`/panel/donate`} component={wrapWithBreadcrumbs(DonationTierViewer)}/>
           <Route path={`/panel`} component={wrapWithBreadcrumbs(Home)}/>
           <Route component={ErrorPage404}/>
         </Switch>

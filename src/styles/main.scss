@@ -299,3 +299,30 @@
     }
   }
 }
+
+.donationTierViewerContainer {
+  margin: 10px 100px 0 100px;
+  .donationLevelSlider {
+    margin: 0 0 80px 0;
+  }
+
+  .donationTierDescriptionContainer {
+    display: flex;
+    flex-wrap: wrap;
+
+    .donationTierName {
+      flex: 1 1 80%;
+      font-size: 30px;
+    }
+
+    .donationTierAmount {
+      flex: 1 1 20%;
+      font-size: 50px;
+      color: #888;
+    }
+
+    .donationTierDescription {
+      flex: 1 1 100%;
+    }
+  }
+}

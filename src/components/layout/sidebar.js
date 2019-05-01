@@ -62,6 +62,12 @@ class PageSidebar extends React.Component {
                 {/*<span>Join Server!</span>*/}
               {/*</a>*/}
             {/*</Menu.Item>}*/}
+            <Menu.Item key={`/panel/donate`}>
+              <Link to={`/panel/donate`}>
+                <Icon type="heart" />
+                <span>Donate</span>
+              </Link>
+            </Menu.Item>
             {this.props.config && this.props.config.github_url && <Menu.Item key="github">
               <a href={this.props.config.github_url}>
                 <Icon type="github" />
@@ -88,7 +94,7 @@ class PageSidebar extends React.Component {
             </Menu.Item>
             <Menu.Item key={`/panel/bans`}>
               <Link to={`/panel/bans`}>
-                {/*<Icon type="book" />*/}
+                <Icon type="heat-map" />
                 <span>Ban Viewer</span>
               </Link>
             </Menu.Item>
@@ -110,13 +116,13 @@ class PageSidebar extends React.Component {
               </Menu.Item>
               <Menu.Item key={`/panel/admin/bans`}>
                 <Link to={`/panel/admin/bans`}>
-                  {/*<Icon type="book" />*/}
+                  <Icon type="heat-map" />
                   <span>Ban Manager</span>
                 </Link>
               </Menu.Item>
               <Menu.Item key={`/panel/admin/jobs`}>
                 <Link to={`/panel/admin/jobs`}>
-                  {/*<Icon type="book" />*/}
+                  <Icon type="tags" />
                   <span>Job Editor</span>
                 </Link>
               </Menu.Item>
