@@ -1,11 +1,13 @@
 import React from 'react';
-import {Menu, List} from "antd";
+import { Menu, List, Button } from "antd";
 import {connect} from 'react-redux'
 import actions from '../../actions/index';
 import EditableList from '../modules/editableList';
 import { sortAlphabeticalByKey, sortBinaryByKey } from "../../utils/sorters";
 import LoadingIndicator from "../modules/loadingIndicator";
 import ChildJobsEditor from '../sections/childJobs/editor';
+import { Link } from "react-router-dom";
+const guid = require('uuid/v4');
 
 class JobsEditor extends React.Component {
   constructor(props) {
@@ -44,6 +46,13 @@ class JobsEditor extends React.Component {
     ));
   }
 
+  selectJob(id) {
+    this.setState({
+      forceSelectedKey: id,
+      forceSelectedKeyGuid: guid(),
+    });
+  }
+
   renderDisplayChildJobs(object) {
     if(this.isLoading()) {
       return (<LoadingIndicator center/>);
@@ -64,7 +73,17 @@ class JobsEditor extends React.Component {
         dataSource={jobItems}
         className="childJobsContentContainer"
         locale={{	emptyText: 'No Child Jobs' }}
-        renderItem={({ id, title }) => (<List.Item key={id} value={id}>{title}</List.Item>)}
+        renderItem={({ id, title }) => (
+          <List.Item key={id} value={id} className="childJobLinkContainer">
+            <a
+              onClick={() => this.selectJob(id)}
+              style={{ padding: '10px auto' }}
+              className="childClassButton"
+            >
+              {title}
+            </a>
+          </List.Item>
+          )}
       />
     );
   }
@@ -101,6 +120,8 @@ class JobsEditor extends React.Component {
           refresh={this.refresh.bind(this)}
           renderHeaderButtons={() => (null)}
           getFields={this.getFields.bind(this)}
+          forceSelectedKeyGuid={this.state.forceSelectedKeyGuid}
+          forceSelectedKey={this.state.forceSelectedKey}
         />
       </React.Fragment>
     );

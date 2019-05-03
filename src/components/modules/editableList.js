@@ -278,6 +278,14 @@ export default class EditableList extends React.Component {
     return await db.delete(this.props.defKey, id);
   }
 
+  componentWillReceiveProps(nextProps) {
+    //this is so hacky, but it allows the parent component to set the selected key
+    if (nextProps.forceSelectedKeyGuid &&
+      nextProps.forceSelectedKeyGuid !== this.props.forceSelectedKeyGuid) {
+      this.setState({ selectedKey: nextProps.forceSelectedKey });
+    }
+  }
+
   startEdit() {
     const object = this.getObject(this.state.selectedKey);
 
