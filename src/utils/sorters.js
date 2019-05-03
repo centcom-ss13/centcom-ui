@@ -22,7 +22,31 @@ const sortNumericallyByKey = (key, defaultValue) => (a, b) => {
   return 0;
 };
 
+const sortBinaryByKey = (key) => (a, b) => {
+  const valueA = a[key];
+  const valueB = b[key];
+
+  if(valueA && !valueB) {
+    return -1;
+  }
+
+  if(valueB && !valueA) {
+    return 1;
+  }
+
+  if(valueA && valueB) {
+    return 0;
+  }
+
+  if(!valueA && !valueB) {
+    return 0;
+  }
+
+  return 0;
+};
+
 export {
   sortAlphabeticalByKey,
   sortNumericallyByKey,
+  sortBinaryByKey,
 };

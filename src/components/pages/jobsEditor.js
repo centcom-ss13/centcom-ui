@@ -3,7 +3,7 @@ import {Menu, List} from "antd";
 import {connect} from 'react-redux'
 import actions from '../../actions/index';
 import EditableList from '../modules/editableList';
-import {sortAlphabeticalByKey} from "../../utils/sorters";
+import { sortAlphabeticalByKey, sortBinaryByKey } from "../../utils/sorters";
 import LoadingIndicator from "../modules/loadingIndicator";
 import ChildJobsEditor from '../sections/childJobs/editor';
 
@@ -34,7 +34,14 @@ class JobsEditor extends React.Component {
   getMenuItems(jobs) {
     return jobs
     .sort(sortAlphabeticalByKey('title'))
-    .map(job => (<Menu.Item key={job.id}>{job.title}</Menu.Item>));
+    .sort(sortBinaryByKey('aggregate'))
+    .map(job => (
+      <Menu.Item key={job.id} style={{
+        backgroundColor: job.aggregate ? '#88F2' : '#0000',
+      }}>
+        {job.title}
+      </Menu.Item>
+    ));
   }
 
   renderDisplayChildJobs(object) {
