@@ -215,12 +215,12 @@ export default {
         name: 'Hide Cost (for using cost to place a value on the slider without an associated dollar amount)',
         displayOrder: 3,
       },
-      sliderName: {
+      slider_name: {
         type: 'STRING',
         name: 'Display name on slider (optional)',
         displayOrder: 4,
       },
-      descriptionName: {
+      description_name: {
         type: 'STRING',
         name: 'Display name on description title (optional)',
         displayOrder: 5,
