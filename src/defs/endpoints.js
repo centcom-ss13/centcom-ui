@@ -193,6 +193,45 @@ export default {
       }
     }
   },
+  donationLevels: {
+    path: '/donationLevels',
+    name: 'donationLevels',
+    singularDisplayName: 'donation level',
+    fields: {
+      name: {
+        type: 'STRING',
+        name: 'Donation Level Name',
+        menuKey: true, //must be the only field with menuKey
+        displayOrder: 1,
+      },
+      cost: {
+        type: 'STRING',
+        name: 'Cost',
+        prefix: '$',
+        displayOrder: 2,
+      },
+      hide_cost: {
+        type: 'TOGGLE',
+        name: 'Hide Cost (for using cost to place a value on the slider without an associated dollar amount)',
+        displayOrder: 3,
+      },
+      sliderName: {
+        type: 'STRING',
+        name: 'Display name on slider (optional)',
+        displayOrder: 4,
+      },
+      descriptionName: {
+        type: 'STRING',
+        name: 'Display name on description title (optional)',
+        displayOrder: 5,
+      },
+      style: {
+        type: 'LONG_STRING',
+        name: '(Advanced use only) JSON JSX style object applied to the slider label (optional)',
+        displayOrder: 6,
+      },
+    }
+  },
   bans: {
     path: '/bans',
     name: 'bans',

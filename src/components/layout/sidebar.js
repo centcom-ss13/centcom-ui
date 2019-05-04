@@ -108,6 +108,12 @@ class PageSidebar extends React.Component {
                   <span>Dashboard</span>
                 </Link>
               </Menu.Item>
+              <Menu.Item key={`/panel/admin/donationLevels`}>
+                <Link to={`/panel/admin/donationLevels`}>
+                  <Icon type="heart" />
+                  <span>Donation Tier Editor</span>
+                </Link>
+              </Menu.Item>
               <Menu.Item key={`/panel/admin/book`}>
                 <Link to={`/panel/admin/book`}>
                   <Icon type="book" />

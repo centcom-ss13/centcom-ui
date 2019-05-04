@@ -26,6 +26,7 @@ class BreadcrumbWrapper extends React.Component {
       '/panel/admin/bans': 'Ban Manager',
       '/panel/bans': 'Ban Viewer',
       '/panel/admin/jobs': 'Job Editor',
+      '/panel/admin/donationLevels': 'Donation Tier Editor',
       '/panel/donate': 'Donate',
     };
 

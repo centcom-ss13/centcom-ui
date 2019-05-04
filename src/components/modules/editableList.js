@@ -19,6 +19,7 @@ export default class EditableList extends React.Component {
     this.state = {
       input: {},
     };
+    this.sideMenuRef = React.createRef();
   }
 
   getEndpointDef() {
@@ -102,7 +103,7 @@ export default class EditableList extends React.Component {
     const displayFields = Object.entries(fields)
     .map(([key, value]) => ({ ...value, key }))
     .sort(sortNumericallyByKey('displayOrder', 9999))
-    .map(({ key, type, custom, name, renderEdit }) => {
+    .map(({ key, type, custom, name, prefix, renderEdit }) => {
       if (custom && renderEdit) {
         return renderEdit(this.state.input, this.setInput.bind(this));
       }
@@ -120,6 +121,7 @@ export default class EditableList extends React.Component {
               className="inputField"
               value={this.state.input[key]}
               onChange={(e) => this.setInput(key, e.target.value)}
+              addonBefore={prefix}
             />
           </div>
         );
@@ -193,7 +195,7 @@ export default class EditableList extends React.Component {
     const displayFields = Object.entries(fields)
     .map(([key, value]) => ({ ...value, key }))
     .sort(sortNumericallyByKey('displayOrder', 9999))
-    .map(({ key, type, custom, name, renderDisplay }) => {
+    .map(({ key, type, custom, name, prefix, renderDisplay }) => {
       if (custom && renderDisplay) {
         return renderDisplay(object);
       }
@@ -203,7 +205,7 @@ export default class EditableList extends React.Component {
         return (
           <div key={key} className="section" style={{ fontStyle: value ? 'normal' : 'italic' }}>
             <span className="bold">{name}:</span>
-            <pre>{value || 'none'}</pre>
+            <pre>{value ? `${prefix ? prefix : ''}${value}` : 'none'}</pre>
           </div>
         );
       }
@@ -283,6 +285,10 @@ export default class EditableList extends React.Component {
     if (nextProps.forceSelectedKeyGuid &&
       nextProps.forceSelectedKeyGuid !== this.props.forceSelectedKeyGuid) {
       this.setState({ selectedKey: nextProps.forceSelectedKey });
+      console.log('forcing selected key', nextProps.forceSelectedKey);
+      if(this.props.scrollToMenuItem) {
+        this.props.scrollToMenuItem(this.sideMenuRef, nextProps.forceSelectedKey);
+      }
     }
   }
 
@@ -401,6 +407,7 @@ export default class EditableList extends React.Component {
             mode="inline"
             onSelect={this.handleMenuSelect.bind(this)}
             selectedKeys={this.state.selectedKey ? [`${this.state.selectedKey}`] : []}
+            ref={this.sideMenuRef}
           >
             {this.getMenuItems()}
           </Menu>

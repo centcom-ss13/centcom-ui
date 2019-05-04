@@ -300,29 +300,29 @@
   }
 }
 
-.donationTierViewerContainer {
+.donationLevelViewerContainer {
   margin: 10px 100px 0 100px;
   .donationLevelSlider {
     margin: 0 0 80px 0;
     padding: 6px 0 6px 0;
   }
 
-  .donationTierDescriptionContainer {
+  .donationLevelDescriptionContainer {
     display: flex;
     flex-wrap: wrap;
 
-    .donationTierName {
+    .donationLevelName {
       flex: 1 1 80%;
       font-size: 30px;
     }
 
-    .donationTierAmount {
+    .donationLevelCost {
       flex: 1 1 20%;
       font-size: 50px;
       color: #888;
     }
 
-    .donationTierDescription {
+    .donationLevelDescription {
       flex: 1 1 100%;
     }
   }

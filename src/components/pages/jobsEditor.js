@@ -14,6 +14,7 @@ class JobsEditor extends React.Component {
     super(props);
 
     this.state = {};
+    this.menuItemRefs = {};
   }
 
   getObjects() {
@@ -37,13 +38,22 @@ class JobsEditor extends React.Component {
     return jobs
     .sort(sortAlphabeticalByKey('title'))
     .sort(sortBinaryByKey('aggregate'))
-    .map(job => (
-      <Menu.Item key={job.id} style={{
-        backgroundColor: job.aggregate ? '#88F2' : '#0000',
-      }}>
-        {job.title}
-      </Menu.Item>
-    ));
+    .map(job => {
+      if(!this.menuItemRefs[job.id]) {
+        this.menuItemRefs[job.id] = React.createRef();
+      }
+      return (
+        <Menu.Item
+          key={job.id}
+          ref={this.menuItemRefs[job.id]}
+          style={{
+            backgroundColor: job.aggregate ? '#88F2' : '#0000',
+          }}
+        >
+          {job.title}
+        </Menu.Item>
+      );
+    });
   }
 
   selectJob(id) {
@@ -109,6 +119,15 @@ class JobsEditor extends React.Component {
     }
   }
 
+  scrollToMenuItem(menuRef, menuItemId) {
+    const menuItemRef = this.menuItemRefs[menuItemId];
+    if (menuItemRef && menuItemRef.current && menuItemRef.current.scrollIntoView) {
+      console.log(menuItemRef.current);
+      menuItemRef.current.scrollIntoView();
+      // menuRef.current.scrollTo(menuItemRef.current.scrollTop);
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -122,6 +141,7 @@ class JobsEditor extends React.Component {
           getFields={this.getFields.bind(this)}
           forceSelectedKeyGuid={this.state.forceSelectedKeyGuid}
           forceSelectedKey={this.state.forceSelectedKey}
+          scrollToMenuItem={this.scrollToMenuItem.bind(this)}
         />
       </React.Fragment>
     );
