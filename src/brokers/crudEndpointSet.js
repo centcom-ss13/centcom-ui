@@ -1,3 +1,5 @@
+require('@babel/polyfill');
+
 export default class CrudEndpointSet {
   constructor(db, endpointDefinition) {
     this.db = db;
@@ -8,13 +10,13 @@ export default class CrudEndpointSet {
     const endpointParams = this.endpointDefinition.params || [];
 
     let defPath;
-    if(method === 'GET' && this.endpointDefinition.getPath) {
+    if (method === 'GET' && this.endpointDefinition.getPath) {
       defPath = this.endpointDefinition.getPath;
-    } else if(method === 'PUT' && this.endpointDefinition.putPath) {
+    } else if (method === 'PUT' && this.endpointDefinition.putPath) {
       defPath = this.endpointDefinition.putPath;
-    } else if(method === 'POST' && this.endpointDefinition.postPath) {
+    } else if (method === 'POST' && this.endpointDefinition.postPath) {
       defPath = this.endpointDefinition.postPath;
-    } else if(method === 'DELETE' && this.endpointDefinition.deletePath) {
+    } else if (method === 'DELETE' && this.endpointDefinition.deletePath) {
       defPath = this.endpointDefinition.deletePath;
     } else {
       defPath = this.endpointDefinition.path;
@@ -25,38 +27,74 @@ export default class CrudEndpointSet {
       (pathAcc, [key, param]) => pathAcc.replace(`:${key}`, params[param.matchIndex - 1]),
       defPath
     );
-
   }
 
-  get(id = null, params = []) {
-    if(id) {
-      return this.db.query(`${this.getBasePath('GET', params)}/${id}`);
+  async get(id = null, params = []) {
+    if (id) {
+      return await this.db.query(`${this.getBasePath('GET', params)}/${id}`);
     }
 
-    return this.db.query(`${this.getBasePath('GET', params)}`);
+    return await this.db.query(`${this.getBasePath('GET', params)}`);
   }
 
-  update(body, params = []) {
-    return this.db.query(`${this.getBasePath('PUT', params)}/${body.id}`, { body: JSON.stringify(body), method: 'PUT' });
+  async update(body, params = []) {
+    const transformedBody = await this.postTransform(body);
+
+    return await this.db.query(`${this.getBasePath('PUT', params)}/${transformedBody.id}`, {
+      body: JSON.stringify(transformedBody),
+      method: 'PUT'
+    });
   }
 
-  create(body, params = []) {
-    return this.db.query(`${this.getBasePath('POST', params)}`, { body: JSON.stringify(body), method: 'POST' });
+  async create(body, params = []) {
+    const transformedBody = await this.postTransform(body);
+
+    return await this.db.query(`${this.getBasePath('POST', params)}`, { body: JSON.stringify(transformedBody), method: 'POST' });
   }
 
-  upsert(body, params = []) {
-    if(body.id) {
+  async postTransform(body) {
+    if (typeof body !== 'object') {
+      return body;
+    }
+
+    const transformedFields = await Promise.all(
+      Object.entries(body).map(
+        async ([key, value]) => {
+          const field = Object.entries(this.endpointDefinition.fields).find(([fieldName]) => fieldName === key);
+
+          if (!field) {
+            return { [key]: value };
+          }
+
+          const fieldData = field[1];
+
+          if (fieldData.postTransform) {
+            const transformedValue = await fieldData.postTransform(value);
+
+            return { [key]: transformedValue };
+          }
+
+          return { [key]: value };
+        }
+      )
+    );
+
+    return transformedFields.reduce((acc, val) => ({ ...acc, ...val }));
+  }
+
+  async upsert(body, params = []) {
+    if (body.id) {
       try {
-        return this.update(body, params);
+        return await this.update(body, params);
       } catch (e) {
-        return this.create(body, params);
+        return await this.create(body, params);
       }
     }
 
-    return this.create(body, params);
+    return await this.create(body, params);
   }
 
-  delete(id, params = []) {
-    return this.db.query(`${this.getBasePath('DELETE', params)}/${id}`, { method: 'DELETE' });
+  async delete(id, params = []) {
+    return await this.db.query(`${this.getBasePath('DELETE', params)}/${id}`, { method: 'DELETE' });
   }
 }

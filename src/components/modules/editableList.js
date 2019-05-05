@@ -195,9 +195,13 @@ export default class EditableList extends React.Component {
     const displayFields = Object.entries(fields)
     .map(([key, value]) => ({ ...value, key }))
     .sort(sortNumericallyByKey('displayOrder', 9999))
-    .map(({ key, type, custom, name, prefix, renderDisplay }) => {
+    .map(({ key, type, custom, name, prefix, renderDisplay, hideDisplay }) => {
       if (custom && renderDisplay) {
         return renderDisplay(object);
+      }
+
+      if(hideDisplay) {
+        return null;
       }
 
       if (type === 'STRING' || type === 'LONG_STRING') {
@@ -269,7 +273,7 @@ export default class EditableList extends React.Component {
       id: parseInt(object.id, 10),
     };
 
-    return await Promise.all(db.update(this.props.defKey, parsedObject, [this.state.selectedKey]));
+    return await db.update(this.props.defKey, parsedObject, [this.state.selectedKey]);
   }
 
   async performCreate(object) {

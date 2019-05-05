@@ -60,6 +60,7 @@ class AuditLogsEditor extends React.Component {
           refresh={this.refresh.bind(this)}
           renderHeaderButtons={() => (null)}
           getFields={this.getFields.bind(this)}
+          displayOnly
         />
       </React.Fragment>
     );

@@ -1,3 +1,7 @@
+require('@babel/polyfill');
+
+import DB from '../brokers/serverBroker';
+
 export default {
   books: {
     path: '/books',
@@ -80,8 +84,8 @@ export default {
     name: 'users',
     singularDisplayName: 'user',
     fields: {
-      nickname: {
-        name: 'Nickname',
+      username: {
+        name: 'Username',
         type: 'STRING',
         menuKey: true, //must be the only field with menuKey
         displayOrder: 1,
@@ -100,14 +104,28 @@ export default {
         type: 'CUSTOM',
         name: 'Permissions:',
         custom: true,
-        displayOrder: 4,
+        displayOrder: 5,
       },
       groups: {
         type: 'CUSTOM',
         name: 'Groups:',
         custom: true,
-        displayOrder: 5,
-      }
+        displayOrder: 6,
+      },
+      password: {
+        type: 'STRING',
+        name: 'Password (enter new value to reset)',
+        hideDisplay: true,
+        postTransform: async (value) => {
+          if(!value) {
+            return null;
+          }
+          const db = new DB();
+
+          return await db.encrypt(value);
+        },
+        displayOrder: 4,
+      },
     },
   },
   userPermissions: {
@@ -160,14 +178,10 @@ export default {
     path: '/groupPermissions',
     name: 'group permissions',
     singularDisplayName: 'group permission',
-    fields: [
-      {
-        name: 'permission_id',
-      },
-      {
-        name: 'group_id',
-      },
-    ],
+    fields: {
+      permission_id: {},
+      group_id: {}
+    },
   },
   jobs: {
     path: '/jobs',
@@ -270,7 +284,7 @@ export default {
         type: 'LONG_STRING',
         name: 'Data',
         displayOrder: 6,
-      }
+      },
     }
   },
   bans: {

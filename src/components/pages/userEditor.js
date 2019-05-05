@@ -37,8 +37,8 @@ class UsersEditor extends React.Component {
 
   getMenuItems(users) {
     return users
-    .sort(sortAlphabeticalByKey('nickname'))
-    .map(user => (<Menu.Item key={user.id}>{user.nickname}</Menu.Item>));
+    .sort(sortAlphabeticalByKey('username'))
+    .map(user => (<Menu.Item key={user.id}>{user.username}</Menu.Item>));
   }
 
   renderEditPermissions(input, setInputHandler) {

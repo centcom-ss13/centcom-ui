@@ -1,7 +1,5 @@
 import React from 'react';
 
-require('@babel/polyfill');
-
 import {Row} from "antd";
 import ServerDetails from "../modules/widgets/serverDetails";
 import Servers from "../modules/widgets/servers";

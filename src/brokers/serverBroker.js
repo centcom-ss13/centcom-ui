@@ -2,6 +2,8 @@ import xhr from 'xhr';
 import {isErrorCode} from "../utils/statusCodes";
 import CrudEndpointSet from "./crudEndpointSet";
 import endpointDefinitions from '../defs/endpoints';
+import { encrypt } from "../utils/rsa";
+import { promisify } from 'util';
 
 class ServerBroker {
   constructor() {
@@ -12,21 +14,29 @@ class ServerBroker {
     .reduce((acc, cur) => ({ ...acc, ...cur }), {});
   }
 
-  get(key, id = null, params = []) {
-    return this.endpoints[key].get(id, params);
+  async get(key, id = null, params = []) {
+    return await this.endpoints[key].get(id, params);
   }
 
-  create(key, body, params = []) {
-    return this.endpoints[key].create(body, params);
+  async create(key, body, params = []) {
+    return await this.endpoints[key].create(body, params);
   }
 
-  update(key, body, params = []) {
+  async encrypt(value) {
+    const publicKey = await this.query('/publicKey', {
+      plainText: true,
+    });
+
+    return encrypt(value, publicKey);
+  }
+
+  async update(key, body, params = []) {
     let outputPromises = [];
 
     const endpoint = this.endpoints[key];
     const endpointDefinition = endpoint.endpointDefinition;
 
-    outputPromises.push(endpoint.update(body, params));
+    await endpoint.update(body, params);
 
     console.log(body);
     endpointDefinition.fields &&
@@ -34,41 +44,40 @@ class ServerBroker {
       .filter(([key, field]) => field.saveHandler && body[key])
       .forEach(([key, field]) => outputPromises.push(field.saveHandler(this, body[key], params)));
 
-    return outputPromises;
+    return await outputPromises;
   }
 
-  delete(key, id, params = []) {
-    return this.endpoints[key].delete(id, params);
+  async delete(key, id, params = []) {
+    return await this.endpoints[key].delete(id, params);
   }
 
-  upsert(key, body, params = []) {
-    return this.endpoints[key].upsert(body, params);
+  async upsert(key, body, params = []) {
+    return await this.endpoints[key].upsert(body, params);
   }
 
-  query(queryString, {
+  async query(queryString, {
     method = 'GET',
     body = undefined,
     headers = {},
+    plainText = false,
   } = {}) {
     const finalHeaders = {
+      ...((method === 'POST' || method === 'PUT') && { 'Content-Type': plainText ? 'text/plain' : 'application/json' }),
       ...headers,
-      ...((method === 'POST' || method === 'PUT') && { 'Content-Type': 'application/json' }),
     };
-    return new Promise((resolve, reject) => {
-      xhr({
-        uri: `${this.serverUrl}${queryString}`,
-        method,
-        body,
-        headers: finalHeaders,
-      }, (err, results) => {
-        const finalError = err || isErrorCode(results.statusCode);
-        if(finalError) {
-          reject(finalError);
-        } else {
-          resolve(JSON.parse(results.body));
-        }
-      });
+
+    const results = await promisify(xhr)({
+      uri: `${this.serverUrl}${queryString}`,
+      method,
+      body,
+      headers: finalHeaders,
     });
+
+    if(isErrorCode(results.statusCode)) {
+      throw results.error || new Error(results.statusCode);
+    }
+
+    return plainText ? results.body : JSON.parse(results.body);
   }
 }
 
