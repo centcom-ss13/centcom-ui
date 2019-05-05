@@ -150,6 +150,11 @@ class PageSidebar extends React.Component {
                   <span>User Manager</span>
                 </Link>
               </Menu.Item>
+              <Menu.Item key={`/panel/admin/auditLogs`}>
+                <Link to={`/panel/admin/auditLogs`}>
+                  <span>Audit Logs</span>
+                </Link>
+              </Menu.Item>
             </SubMenu>
           </Menu>
         </Spin>

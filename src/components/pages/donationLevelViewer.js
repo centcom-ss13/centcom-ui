@@ -14,7 +14,6 @@ const DONATION_TYPE_MONTHLY = 'DONATION_TYPE_MONTHLY';
 class DonationLevelViewer extends React.Component {
   state = {
     donationType: DONATION_TYPE_ONE_TIME,
-    selectedCost: 15,
   };
 
   getSliderMarks() {
@@ -103,13 +102,18 @@ class DonationLevelViewer extends React.Component {
 
   renderDonationDescription() {
     const level = this.getSelectedLevel();
-    return (
-      <div className="donationLevelDescriptionContainer">
-        <div className="donationLevelName">{level.description_name || level.name}</div>
-        <div className="donationLevelCost">{level.hide_cost ? '' : `$${level.cost}`}</div>
-        <div className="donationLevelDescription">{level.description}</div>
-      </div>
-    )
+
+    if(level) {
+      return (
+        <div className="donationLevelDescriptionContainer">
+          <div className="donationLevelName">{level.description_name || level.name}</div>
+          <div className="donationLevelCost">{level.hide_cost ? '' : `$${level.cost}`}</div>
+          <div className="donationLevelDescription">{level.description}</div>
+        </div>
+      )
+    }
+
+    return null;
   }
 
   getContent() {

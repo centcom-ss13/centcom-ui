@@ -195,7 +195,7 @@ export default {
   },
   donationLevels: {
     path: '/donationLevels',
-    name: 'donationLevels',
+    name: 'donation levels',
     singularDisplayName: 'donation level',
     fields: {
       name: {
@@ -230,6 +230,47 @@ export default {
         name: '(Advanced use only) JSON JSX style object applied to the slider label (optional)',
         displayOrder: 6,
       },
+    }
+  },
+  auditLogs: {
+    path: '/auditLogs',
+    name: 'auditLogs',
+    singularDisplayName: 'audit log',
+    fields: {
+      user_id: {
+        type: 'NO_DISPLAY',
+        name: 'User ID'
+      },
+      user_name: {
+        type: 'STRING',
+        name: 'Username',
+        displayOrder: 1,
+      },
+      timestamp: {
+        type: 'STRING',
+        name: 'Timestamp',
+        displayOrder: 2,
+      },
+      action: {
+        type: 'STRING',
+        name: 'Action',
+        displayOrder: 3,
+      },
+      endpoint: {
+        type: 'STRING',
+        name: 'Endpoint',
+        displayOrder: 4,
+      },
+      failed: {
+        type: 'TOGGLE',
+        name: 'Action Failed',
+        displayOrder: 5,
+      },
+      value: {
+        type: 'LONG_STRING',
+        name: 'Data',
+        displayOrder: 6,
+      }
     }
   },
   bans: {

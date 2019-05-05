@@ -20,6 +20,7 @@ class RootContainer extends React.Component {
     this.props.fetch('bans');
     this.props.fetch('jobs');
     this.props.fetch('donationLevels');
+    this.props.fetch('auditLogs');
   }
   render() {
     return (
