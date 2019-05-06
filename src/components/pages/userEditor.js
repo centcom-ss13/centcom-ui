@@ -14,6 +14,10 @@ class UsersEditor extends React.Component {
     super(props);
 
     this.state = {};
+
+    props.fetch('users');
+    props.fetch('permissions');
+    props.fetch('groups');
   }
 
   getObjects() {

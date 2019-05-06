@@ -15,6 +15,8 @@ class JobsEditor extends React.Component {
 
     this.state = {};
     this.menuItemRefs = {};
+
+    props.fetch('jobs');
   }
 
   getObjects() {

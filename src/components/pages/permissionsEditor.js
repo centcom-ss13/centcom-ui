@@ -10,6 +10,8 @@ class PermissionsEditor extends React.Component {
     super(props);
 
     this.state = {};
+
+    props.fetch('permissions');
   }
 
   getObjects() {

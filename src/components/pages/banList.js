@@ -10,6 +10,8 @@ class BanList extends React.Component {
     super(props);
 
     this.state = {};
+
+    props.fetch('bans');
   }
 
   getObjects() {

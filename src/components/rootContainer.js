@@ -10,17 +10,13 @@ class RootContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.props.fetch('currentUser');
     this.props.fetch('servers');
     this.props.fetch('config');
     this.props.fetch('books');
     this.props.fetch('bookCategories');
-    this.props.fetch('permissions');
-    this.props.fetch('users');
-    this.props.fetch('groups');
     this.props.fetch('bans');
-    this.props.fetch('jobs');
     this.props.fetch('donationLevels');
-    this.props.fetch('auditLogs');
   }
   render() {
     return (

@@ -11,6 +11,8 @@ class AuditLogsEditor extends React.Component {
 
     this.state = {};
     this.menuItemRefs = {};
+
+    props.fetch('auditLogs');
   }
 
   getObjects() {

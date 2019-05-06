@@ -15,6 +15,9 @@ class BookList extends React.Component {
     super(props);
 
     this.state = {};
+
+    props.fetch('books');
+    props.fetch('bookCategories');
   }
 
   getObjects() {

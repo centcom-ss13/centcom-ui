@@ -128,6 +128,13 @@ export default {
       },
     },
   },
+  currentUser: {
+    path: '/currentUser',
+    name: 'current user',
+    singularDisplayName: 'current user',
+    fields: {
+    },
+  },
   userPermissions: {
     path: '/userPermissions',
     name: 'user permissions',

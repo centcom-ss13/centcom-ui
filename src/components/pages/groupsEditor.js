@@ -12,6 +12,9 @@ class GroupsEditor extends React.Component {
     super(props);
 
     this.state = {};
+
+    props.fetch('groups');
+    props.fetch('permissions');
   }
 
   getObjects() {

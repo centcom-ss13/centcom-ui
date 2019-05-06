@@ -10,6 +10,8 @@ class DonationLevelEditor extends React.Component {
     super(props);
 
     this.state = {};
+
+    props.fetch('donationLevels');
   }
 
   getObjects() {

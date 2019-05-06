@@ -35,7 +35,74 @@ class PageSidebar extends React.Component {
   }
 
   isLoading() {
-    return this.props.config === undefined;
+    return this.props.config === undefined || this.props.loadingCurrentUser;
+  }
+
+  getAdminSubmenu() {
+    if(!this.props.currentUser) {
+      return null;
+    }
+
+    return (
+      <SubMenu
+        key="admin_menu"
+        title={<span><Icon type="pie-chart" /><span>Admin</span></span>}
+      >
+        <Menu.Item key={`/panel/admin`}>
+          <Link to={`/panel/admin`}>
+            <Icon type="dashboard" />
+            <span>Dashboard</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key={`/panel/admin/donationLevels`}>
+          <Link to={`/panel/admin/donationLevels`}>
+            <Icon type="heart" />
+            <span>Donation Tier Editor</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key={`/panel/admin/book`}>
+          <Link to={`/panel/admin/book`}>
+            <Icon type="book" />
+            <span>Book Editor</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key={`/panel/admin/bans`}>
+          <Link to={`/panel/admin/bans`}>
+            <Icon type="heat-map" />
+            <span>Ban Manager</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key={`/panel/admin/jobs`}>
+          <Link to={`/panel/admin/jobs`}>
+            <Icon type="tags" />
+            <span>Job Editor</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key={`/panel/admin/permissions`}>
+          <Link to={`/panel/admin/permissions`}>
+            <Icon type="file-protect" />
+            <span>Permissions</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key={`/panel/admin/groups`}>
+          <Link to={`/panel/admin/groups`}>
+            <Icon type="usergroup-add" />
+            <span>User Groups</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key={`/panel/admin/users`}>
+          <Link to={`/panel/admin/users`}>
+            <Icon type="user" />
+            <span>User Manager</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key={`/panel/admin/auditLogs`}>
+          <Link to={`/panel/admin/auditLogs`}>
+            <span>Audit Logs</span>
+          </Link>
+        </Menu.Item>
+      </SubMenu>
+    );
   }
 
   render() {
@@ -98,64 +165,7 @@ class PageSidebar extends React.Component {
                 <span>Ban Viewer</span>
               </Link>
             </Menu.Item>
-            <SubMenu
-              key="admin_menu"
-              title={<span><Icon type="pie-chart" /><span>Admin</span></span>}
-            >
-              <Menu.Item key={`/panel/admin`}>
-                <Link to={`/panel/admin`}>
-                  <Icon type="dashboard" />
-                  <span>Dashboard</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key={`/panel/admin/donationLevels`}>
-                <Link to={`/panel/admin/donationLevels`}>
-                  <Icon type="heart" />
-                  <span>Donation Tier Editor</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key={`/panel/admin/book`}>
-                <Link to={`/panel/admin/book`}>
-                  <Icon type="book" />
-                  <span>Book Editor</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key={`/panel/admin/bans`}>
-                <Link to={`/panel/admin/bans`}>
-                  <Icon type="heat-map" />
-                  <span>Ban Manager</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key={`/panel/admin/jobs`}>
-                <Link to={`/panel/admin/jobs`}>
-                  <Icon type="tags" />
-                  <span>Job Editor</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key={`/panel/admin/permissions`}>
-                <Link to={`/panel/admin/permissions`}>
-                  <Icon type="file-protect" />
-                  <span>Permissions</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key={`/panel/admin/groups`}>
-                <Link to={`/panel/admin/groups`}>
-                  <Icon type="usergroup-add" />
-                  <span>User Groups</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key={`/panel/admin/users`}>
-                <Link to={`/panel/admin/users`}>
-                  <Icon type="user" />
-                  <span>User Manager</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key={`/panel/admin/auditLogs`}>
-                <Link to={`/panel/admin/auditLogs`}>
-                  <span>Audit Logs</span>
-                </Link>
-              </Menu.Item>
-            </SubMenu>
+            {this.getAdminSubmenu()}
           </Menu>
         </Spin>
       </Sider>
@@ -166,6 +176,8 @@ class PageSidebar extends React.Component {
 const mapStateToProps = (state) => {
   return {
     config: state.app.config,
+    currentUser: state.app.currentUser,
+    loadingCurrentUser: state.app.loading.currentUser,
   }
 };
 

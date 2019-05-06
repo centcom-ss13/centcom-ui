@@ -62,7 +62,10 @@ class ServerBroker {
     plainText = false,
   } = {}) {
     const finalHeaders = {
-      ...((method === 'POST' || method === 'PUT') && { 'Content-Type': plainText ? 'text/plain' : 'application/json' }),
+      'Accept': plainText ? 'text/plain' : 'application/json',
+      ...((method === 'POST' || method === 'PUT') && {
+        'Content-Type': plainText ? 'text/plain' : 'application/json',
+      }),
       ...headers,
     };
 
@@ -71,13 +74,30 @@ class ServerBroker {
       method,
       body,
       headers: finalHeaders,
+      withCredentials: true,
     });
 
     if(isErrorCode(results.statusCode)) {
-      throw results.error || new Error(results.statusCode);
+      throw JSON.parse(results.body);
     }
 
     return plainText ? results.body : JSON.parse(results.body);
+  }
+
+  async login(username, password) {
+    const encryptedPassword = await this.encrypt(password);
+
+    return await this.query('/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        password: encryptedPassword,
+      }),
+    });
+  }
+
+  async logout() {
+    return await this.query('/logout');
   }
 }
 

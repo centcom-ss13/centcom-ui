@@ -12,9 +12,15 @@ const DONATION_TYPE_ONE_TIME = 'DONATION_TYPE_ONE_TIME';
 const DONATION_TYPE_MONTHLY = 'DONATION_TYPE_MONTHLY';
 
 class DonationLevelViewer extends React.Component {
-  state = {
-    donationType: DONATION_TYPE_ONE_TIME,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      donationType: DONATION_TYPE_ONE_TIME,
+    };
+
+    props.fetch('donationLevels');
+  }
 
   getSliderMarks() {
     return this.props.donationLevels.map(({ cost, name, slider_name, style = {}, label, hide_cost }) => {
