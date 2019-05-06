@@ -15,6 +15,7 @@ const {
 
 const style = {
   color: '#EEE',
+  padding: '0 30px 0 30px',
 };
 const titleStyle = {
   color: '#EEE',
@@ -24,6 +25,13 @@ const titleStyle = {
 const userSectionStyle = {
   float: 'right',
   height: '100%',
+};
+
+const userSectionButtonStyle = {
+  margin: '0 6px 0 6px',
+  background: '#7799BB33',
+  color: '#CCC',
+  fontWeight: 'bold',
 };
 
 class PageHeader extends React.Component {
@@ -59,6 +67,13 @@ class PageHeader extends React.Component {
     });
   }
 
+  handleLoginToRegister() {
+    this.setState({
+      loginVisible: false,
+      registerVisible: true,
+    });
+  }
+
   async logout() {
     this.setState({ userSectionLoading: true });
     await db.logout();
@@ -73,15 +88,15 @@ class PageHeader extends React.Component {
     if (this.props.currentUser) {
       return (
         <React.Fragment>
-          <Button onClick={this.logout.bind(this)}>Logout</Button>
+          <Button style={userSectionButtonStyle} onClick={this.logout.bind(this)}>Logout</Button>
         </React.Fragment>
       );
     }
 
     return (
       <React.Fragment>
-        <Button onClick={this.openLoginModal.bind(this)}>Login</Button>
-        <Button onClick={this.openRegisterModal.bind(this)}>Register</Button>
+        <Button style={userSectionButtonStyle} onClick={this.openLoginModal.bind(this)}>Login</Button>
+        <Button style={userSectionButtonStyle} onClick={this.openRegisterModal.bind(this)}>Register</Button>
       </React.Fragment>
     )
   }
@@ -107,6 +122,7 @@ class PageHeader extends React.Component {
         <LoginModal
           visible={this.state.loginVisible}
           closeHandler={this.closeLoginModal.bind(this)}
+          handleLoginToRegister={this.handleLoginToRegister.bind(this)}
         />
         <RegisterModal
           visible={this.state.registerVisible}

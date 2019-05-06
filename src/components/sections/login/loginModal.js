@@ -46,7 +46,7 @@ class LoginModal extends React.Component {
         visible={this.props.visible}
         footer={null}
         destroyOnClose={true}
-        bodyStyle={{ height: 300 }}
+        bodyStyle={{ height: 280 }}
         width={300}
         onCancel={this.props.closeHandler}
       >
@@ -54,6 +54,7 @@ class LoginModal extends React.Component {
           <LoginForm
             onChange={this.onChange.bind(this)}
             handleSubmit={this.handleSubmit.bind(this)}
+            handleLoginToRegister={this.props.handleLoginToRegister}
           />
         )}
       </Modal>

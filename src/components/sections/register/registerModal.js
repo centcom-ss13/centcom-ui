@@ -43,11 +43,11 @@ class RegisterModal extends React.Component {
   render() {
     return (
       <Modal
-        title="Register"
+        title="User Registration"
         visible={this.props.visible}
         footer={null}
         destroyOnClose={true}
-        bodyStyle={{ height: 330 }}
+        bodyStyle={{ height: 280 }}
         width={300}
         onCancel={this.props.closeHandler}
       >

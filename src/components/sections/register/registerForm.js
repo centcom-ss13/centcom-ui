@@ -35,17 +35,9 @@ class RegisterForm extends React.Component {
           )}
         </Form.Item>
         <Form.Item>
-          {getFieldDecorator('remember', {
-            valuePropName: 'checked',
-            initialValue: true,
-          })(
-            <Checkbox>Remember me</Checkbox>
-          )}
-          <a className="register-form-forgot" href="">Forgot password</a>
           <Button type="primary" htmlType="submit" className="register-form-button">
-            Log in
+            Register
           </Button>
-          Or <a href="">register now!</a>
         </Form.Item>
       </Form>
     );
