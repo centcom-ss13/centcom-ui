@@ -96,6 +96,19 @@ class ServerBroker {
     });
   }
 
+  async register(username, email, password) {
+    const encryptedPassword = await this.encrypt(password);
+
+    return await this.query('/register', {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        email,
+        password: encryptedPassword,
+      }),
+    });
+  }
+
   async logout() {
     return await this.query('/logout');
   }

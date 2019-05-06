@@ -3,6 +3,7 @@ import { Button, Layout, Spin } from 'antd';
 import actions from "../../actions/index";
 import { connect } from "react-redux";
 import LoginModal from '../sections/login/loginModal';
+import RegisterModal from '../sections/register/registerModal';
 import DB from '../../brokers/serverBroker';
 import LoadingIndicator from "../modules/loadingIndicator";
 
@@ -46,6 +47,18 @@ class PageHeader extends React.Component {
     });
   }
 
+  openRegisterModal() {
+    this.setState({
+      registerVisible: true,
+    });
+  }
+
+  closeRegisterModal() {
+    this.setState({
+      registerVisible: false,
+    });
+  }
+
   async logout() {
     this.setState({ userSectionLoading: true });
     await db.logout();
@@ -68,6 +81,7 @@ class PageHeader extends React.Component {
     return (
       <React.Fragment>
         <Button onClick={this.openLoginModal.bind(this)}>Login</Button>
+        <Button onClick={this.openRegisterModal.bind(this)}>Register</Button>
       </React.Fragment>
     )
   }
@@ -93,6 +107,10 @@ class PageHeader extends React.Component {
         <LoginModal
           visible={this.state.loginVisible}
           closeHandler={this.closeLoginModal.bind(this)}
+        />
+        <RegisterModal
+          visible={this.state.registerVisible}
+          closeHandler={this.closeRegisterModal.bind(this)}
         />
       </Header>
     );
