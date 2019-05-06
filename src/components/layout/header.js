@@ -76,7 +76,9 @@ class PageHeader extends React.Component {
 
   async logout() {
     this.setState({ userSectionLoading: true });
-    await db.logout();
+    try {
+      await db.logout();
+    } catch(e) {}
     await this.props.fetch('currentUser');
     this.setState({ userSectionLoading: false });
   }

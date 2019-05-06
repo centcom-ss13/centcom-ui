@@ -13,6 +13,7 @@ const SubMenu = Menu.SubMenu;
 
 const style = {
   color: '#EEE',
+  overflowY: 'auto',
 };
 
 class PageSidebar extends React.Component {

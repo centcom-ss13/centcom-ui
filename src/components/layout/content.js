@@ -12,6 +12,7 @@ const style = {
   minHeight: 'unset',
   display: 'flex',
   flexDirection: 'column',
+  overflowY: 'auto',
 };
 
 export default class PageContent extends React.Component {
