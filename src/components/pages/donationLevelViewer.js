@@ -22,6 +22,14 @@ class DonationLevelViewer extends React.Component {
     props.fetch('donationLevels');
   }
 
+  componentDidUpdate(prevProps) {
+    if(!this.state.selectedCost && this.props.donationLevels) {
+      this.setState({
+        selectedCost: this.getMinimumCost(), // TODO: Add a default selector in the donation tier editor, and use that here
+      });
+    }
+  }
+
   getSliderMarks() {
     return this.props.donationLevels.map(({ cost, name, slider_name, style = {}, label, hide_cost }) => {
       return {
@@ -124,7 +132,7 @@ class DonationLevelViewer extends React.Component {
 
   getContent() {
     if (this.isLoading()) {
-      return (<LoadingIndicator/>);
+      return (<LoadingIndicator center />);
     }
 
     return (
