@@ -71,7 +71,7 @@ class UserGroupsEditor extends React.Component {
           selectedKeys={this.state.selectedKeys}
           onChange={this.onChange.bind(this)}
           onSelectChange={this.handleSelectChange.bind(this)}
-          render={item => item.description}
+          render={item => item.name}
           disabled={this.isLoading()}
           loading={this.isLoading()}
           listStyle={{

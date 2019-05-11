@@ -98,7 +98,7 @@ class UsersEditor extends React.Component {
         dataSource={userGroupItems}
         className="userGroupsContentContainer"
         locale={{	emptyText: 'No Groups' }}
-        renderItem={({ id, description }) => (<List.Item key={id} value={id}>{description}</List.Item>)}
+        renderItem={({ id, name }) => (<List.Item key={id} value={id}>{name}</List.Item>)}
       />
     );
   }
