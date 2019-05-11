@@ -113,13 +113,13 @@ class PageHeader extends React.Component {
   }
 
   render() {
-    if (this.props.config === undefined) {
+    if (this.props.communityConfig === undefined) {
       return (<Header style={style}><Spin/></Header>);
     }
 
     return (
       <Header style={style}>
-        <h2 style={titleStyle}>{this.props.config.panel_header_text}</h2>
+        <h2 style={titleStyle}>{this.props.communityConfig.panel_header_text}</h2>
         {this.getUserSection()}
         <LoginModal
           visible={this.state.loginVisible}
@@ -137,7 +137,7 @@ class PageHeader extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    config: state.app.config,
+    communityConfig: state.app.communityConfig,
     currentUser: state.app.currentUser,
     loadingCurrentUser: state.app.loading.currentUser,
   }

@@ -36,7 +36,7 @@ class PageSidebar extends React.Component {
   }
 
   isLoading() {
-    return this.props.config === undefined || this.props.loadingCurrentUser;
+    return this.props.communityConfig === undefined || this.props.loadingCurrentUser;
   }
 
   getAdminSubmenu() {
@@ -112,10 +112,10 @@ class PageSidebar extends React.Component {
         <div className="logo" />
         <Spin spinning={this.isLoading()} wrapperClassName="sidebar-loading-container">
           <Menu theme="dark" selectedKeys={this.state.selectedKeys} mode="inline">
-            {this.props.config && this.props.config.community_name && <Menu.Item key={`/panel`}>
+            {this.props.communityConfig && this.props.communityConfig.community_name && <Menu.Item key={`/panel`}>
               <Link to={`/panel`}>
                 <Icon type="home" />
-                <span>{this.props.config.community_name} Home</span>
+                <span>{this.props.communityConfig.community_name} Home</span>
               </Link>
             </Menu.Item>}
             {/*{this.props.community.serverLink && <Menu.Item key="joinserver">*/}
@@ -130,20 +130,20 @@ class PageSidebar extends React.Component {
                 <span>Donate</span>
               </Link>
             </Menu.Item>
-            {this.props.config && this.props.config.github_url && <Menu.Item key="github">
-              <a href={this.props.config.github_url}>
+            {this.props.communityConfig && this.props.communityConfig.github_url && <Menu.Item key="github">
+              <a href={this.props.communityConfig.github_url}>
                 <Icon type="github" />
                 <span>Github</span>
               </a>
             </Menu.Item>}
-            {this.props.config && this.props.config.forums_url && <Menu.Item key="forums">
-              <a href={this.props.config.forums_url}>
+            {this.props.communityConfig && this.props.communityConfig.forums_url && <Menu.Item key="forums">
+              <a href={this.props.communityConfig.forums_url}>
                 <Icon type="layout" />
                 <span>Forums</span>
               </a>
             </Menu.Item>}
-            {this.props.config && this.props.config.wiki_url && <Menu.Item key="wiki">
-              <a href={this.props.config.wiki_url}>
+            {this.props.communityConfig && this.props.communityConfig.wiki_url && <Menu.Item key="wiki">
+              <a href={this.props.communityConfig.wiki_url}>
                 <Icon type="read" />
                 <span>Wiki</span>
               </a>
@@ -170,7 +170,7 @@ class PageSidebar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    config: state.app.config,
+    communityConfig: state.app.communityConfig,
     currentUser: state.app.currentUser,
     loadingCurrentUser: state.app.loading.currentUser,
   }

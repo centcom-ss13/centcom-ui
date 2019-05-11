@@ -14,12 +14,12 @@ class SplashPage extends React.Component {
     super(props);
   }
   render() {
-    if(this.props.config === undefined) {
+    if(this.props.communityConfig === undefined) {
       return (<LoadingIndicator center />);
     }
     return (
       <div style={splashStyle}>
-        <h1>{this.props.config.splash_title_text}</h1>
+        <h1>{this.props.communityConfig.splash_title_text}</h1>
         <Redirect to="/panel" />
       </div>
     );
@@ -28,7 +28,7 @@ class SplashPage extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    config: state.app.config,
+    communityConfig: state.app.communityConfig,
   }
 };
 

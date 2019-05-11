@@ -39,17 +39,33 @@ class JobsEditor extends React.Component {
   getMenuItems(jobs) {
     return jobs
     .sort(sortAlphabeticalByKey('title'))
+    .sort(sortBinaryByKey('antag'))
     .sort(sortBinaryByKey('aggregate'))
     .map(job => {
       if(!this.menuItemRefs[job.id]) {
         this.menuItemRefs[job.id] = React.createRef();
       }
+
+      let backgroundColor;
+      if(job.aggregate && !job.antag) {
+        backgroundColor = '#88F3';
+      }
+      if(!job.aggregate && !job.antag) {
+        backgroundColor = '#8882';
+      }
+      if(job.aggregate && job.antag) {
+        backgroundColor = '#F8F3';
+      }
+      if(!job.aggregate && job.antag) {
+        backgroundColor = '#F883';
+      }
+
       return (
         <Menu.Item
           key={job.id}
           ref={this.menuItemRefs[job.id]}
           style={{
-            backgroundColor: job.aggregate ? '#88F2' : '#0000',
+            backgroundColor,
           }}
         >
           {job.title}

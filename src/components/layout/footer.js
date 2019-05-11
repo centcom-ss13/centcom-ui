@@ -13,19 +13,19 @@ const style = {
 
 class PageFooter extends React.Component {
   render() {
-    if(this.props.config === undefined) {
+    if(this.props.communityConfig === undefined) {
       return (<Footer style={style}><Spin /></Footer>);
     }
 
     return (
-      <Footer style={style}>{this.props.config.footer_text}</Footer>
+      <Footer style={style}>{this.props.communityConfig.footer_text}</Footer>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    config: state.app.config,
+    communityConfig: state.app.communityConfig,
   }
 };
 

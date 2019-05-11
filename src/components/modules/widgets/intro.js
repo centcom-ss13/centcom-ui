@@ -37,7 +37,7 @@ class Intro extends React.Component {
   }
 
   getContent() {
-    if (this.props.servers === undefined || this.props.config === undefined) {
+    if (this.props.servers === undefined || this.props.communityConfig === undefined) {
       return (
         <Spin><div className="panelIntro"></div></Spin>
       );
@@ -47,7 +47,7 @@ class Intro extends React.Component {
 
     return (
       <div className="panelIntro">
-        <h1 style={{ fontSize: '35px' }}>{this.props.config.panel_home_intro_text}</h1>
+        <h1 style={{ fontSize: '35px' }}>{this.props.communityConfig.panel_home_intro_text}</h1>
         {mainServer && <a href={`byond://${mainServer.url}:${mainServer.port}`}>
           <Button type="primary" style={{ margin: '10px' }}>Join Server!</Button>
         </a>}
@@ -71,7 +71,7 @@ class Intro extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    config: state.app.config,
+    communityConfig: state.app.communityConfig,
     servers: state.app.servers,
   }
 };

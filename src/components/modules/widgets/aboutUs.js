@@ -36,12 +36,12 @@ class AboutUs extends React.Component {
   }
 
   isLoading() {
-    return this.props.config === undefined;
+    return this.props.communityConfig === undefined;
   }
 
   wrapWithLinkIfExists(Component, configKey) {
-    if(this.props.config && this.props.config[configKey]) {
-     return (<a href={this.props.config[configKey]} style={iconLinkStyle}><Component /></a>)
+    if(this.props.communityConfig && this.props.communityConfig[configKey]) {
+     return (<a href={this.props.communityConfig[configKey]} style={iconLinkStyle}><Component /></a>)
     }
 
     return <Component />
@@ -88,7 +88,7 @@ class AboutUs extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    config: state.app.config,
+    communityConfig: state.app.communityConfig,
   }
 };
 

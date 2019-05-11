@@ -52,12 +52,17 @@ export default {
       access_level: {},
     },
   },
-  config: {
-    path: '/config',
-    name: 'config',
-    singularDisplayName: 'config',
+  communityConfig: {
+    path: '/communityConfig',
+    name: 'community config',
+    singularDisplayName: 'community config',
     fields: {
-      cfg_key: {},
+      cfg_key: {
+        type: 'STRING',
+        readOnly: true,
+        menuKey: true,
+        displayOrder: 1,
+      },
       cfg_value: {},
     },
   },
@@ -192,11 +197,16 @@ export default {
         name: 'Aggregate Job',
         displayOrder: 2,
       },
+      antag: {
+        type: 'TOGGLE',
+        name: 'Antag Role',
+        displayOrder: 3,
+      },
       childJobIds: {
         type: 'CUSTOM',
         name: 'Child Jobs',
         custom: true,
-        displayOrder: 3,
+        displayOrder: 4,
       }
     }
   },

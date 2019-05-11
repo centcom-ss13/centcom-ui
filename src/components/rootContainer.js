@@ -12,7 +12,7 @@ class RootContainer extends React.Component {
 
     this.props.fetch('currentUser');
     this.props.fetch('servers');
-    this.props.fetch('config');
+    this.props.fetch('communityConfig');
     this.props.fetch('books');
     this.props.fetch('bookCategories');
     this.props.fetch('bans');
@@ -31,7 +31,7 @@ class RootContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    config: state.app.config,
+    communityConfig: state.app.communityConfig,
   }
 };
 

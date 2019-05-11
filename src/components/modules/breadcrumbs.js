@@ -31,10 +31,10 @@ class BreadcrumbWrapper extends React.Component {
       '/panel/donate': 'Donate',
     };
 
-    if(this.props.config && this.props.config.community_name) {
+    if(this.props.communityConfig && this.props.communityConfig.community_name) {
       breadcrumbNameMap = {
         ...breadcrumbNameMap,
-        '/panel': `${this.props.config.community_name} Home`,
+        '/panel': `${this.props.communityConfig.community_name} Home`,
       };
     }
 
