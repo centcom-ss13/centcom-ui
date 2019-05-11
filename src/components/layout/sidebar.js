@@ -79,12 +79,6 @@ class PageSidebar extends React.Component {
             <span>Job Editor</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key={`/panel/admin/permissions`}>
-          <Link to={`/panel/admin/permissions`}>
-            <Icon type="file-protect" />
-            <span>Permissions</span>
-          </Link>
-        </Menu.Item>
         <Menu.Item key={`/panel/admin/groups`}>
           <Link to={`/panel/admin/groups`}>
             <Icon type="usergroup-add" />

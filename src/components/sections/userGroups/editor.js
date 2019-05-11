@@ -74,7 +74,11 @@ class UserGroupsEditor extends React.Component {
           render={item => item.description}
           disabled={this.isLoading()}
           loading={this.isLoading()}
-          listStyle={{ width: '200px' }}
+          listStyle={{
+            width: 400,
+            height: 270,
+          }}
+          operations={['Remove User Group', 'Add User Group']}
           locale={{
             notFoundContent: 'none',
             searchPlaceholder: 'Search...',

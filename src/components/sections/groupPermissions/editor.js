@@ -42,15 +42,15 @@ class GroupPermissionsEditor extends React.Component {
   }
 
   getAvailableKeys(chosenKeys = this.state.chosenKeys) {
-    return this.props.permissions
-    .map(({ id }) => id)
-    .filter((id) => !chosenKeys.includes(id));
+    return Object.values(this.props.permissions)
+    .map(({ name }) => name)
+    .filter((name) => !chosenKeys.includes(name));
   }
 
   getChosenKeysFromAvailableKeys(availableKeys) {
-    return this.props.permissions
-    .map(({ id }) => id)
-    .filter((id) => !availableKeys.includes(id));
+    return Object.values(this.props.permissions)
+    .map(({ name }) => name)
+    .filter((name) => !availableKeys.includes(name));
   }
 
   isLoading() {
@@ -58,8 +58,8 @@ class GroupPermissionsEditor extends React.Component {
   }
 
   render() {
-    const allPermissions = this.props.permissions
-    .map((permission) => ({ ...permission, key: permission.id }));
+    const allPermissions = Object.values(this.props.permissions)
+    .map((permission) => ({ ...permission, key: permission.name }));
 
     return (
       <div className="groupPermissionsEditorContainer">
@@ -74,7 +74,11 @@ class GroupPermissionsEditor extends React.Component {
           render={item => item.description}
           disabled={this.isLoading()}
           loading={this.isLoading()}
-          listStyle={{ width: '200px' }}
+          listStyle={{
+            width: 400,
+            height: 270,
+          }}
+          operations={['Remove Group Permission', 'Add Group Permission']}
           locale={{
             notFoundContent: 'none',
             searchPlaceholder: 'Search...',

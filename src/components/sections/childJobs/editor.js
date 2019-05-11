@@ -77,7 +77,11 @@ class ChildJobsEditor extends React.Component {
           render={item => item.title}
           disabled={this.isLoading()}
           loading={this.isLoading()}
-          listStyle={{ width: '200px' }}
+          listStyle={{
+            width: 400,
+            height: 270,
+          }}
+          operations={['Remove Child Job', 'Add Child Job']}
           locale={{
             notFoundContent: 'none',
             searchPlaceholder: 'Search...',

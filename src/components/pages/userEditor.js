@@ -7,7 +7,7 @@ import {sortAlphabeticalByKey} from "../../utils/sorters";
 import LoadingIndicator from "../modules/loadingIndicator";
 import UserPermissionsEditor from '../sections/userPermissions/editor';
 import UserGroupsEditor from '../sections/userGroups/editor';
-
+import { unique, flatMap } from '../../utils/arrayUtils';
 
 class UsersEditor extends React.Component {
   constructor(props) {
@@ -66,18 +66,18 @@ class UsersEditor extends React.Component {
       return (<LoadingIndicator center/>);
     }
 
-    const userPermissionItems = this.props.permissions
-    .filter(({ id }) => object.permissions.includes(id));
+    const userPermissionItems = Object.values(this.props.permissions)
+    .filter(({ name }) => object.permissions.includes(name));
 
     return (
       <List
-        header={<div>Permissions:</div>}
+        header={<div>Granted Permissions:</div>}
         key="userPermissions"
         bordered
         dataSource={userPermissionItems}
         className="userPermissionsContentContainer"
         locale={{	emptyText: 'No Permissions' }}
-        renderItem={({ id, description }) => (<List.Item key={id} value={id}>{description}</List.Item>)}
+        renderItem={({ name, description }) => (<List.Item key={name} value={name}>{name} - {description}</List.Item>)}
       />
     );
   }
@@ -98,13 +98,53 @@ class UsersEditor extends React.Component {
         dataSource={userGroupItems}
         className="userGroupsContentContainer"
         locale={{	emptyText: 'No Groups' }}
-        renderItem={({ permission_id, description }) => (<List.Item key={permission_id} value={permission_id}>{description}</List.Item>)}
+        renderItem={({ id, description }) => (<List.Item key={id} value={id}>{description}</List.Item>)}
+      />
+    );
+  }
+
+  renderCombinedPermissions(object) {
+    if(this.isLoading()) {
+      return (<LoadingIndicator center/>);
+    }
+
+    const userPermissionItems = Object.values(this.props.permissions)
+    .filter(({ name }) => object.permissions.includes(name));
+
+    const userGroupItems = this.props.groups
+    .filter(({ id }) => object.groups.includes(id));
+
+    const userGroupPermissionNames = unique(flatMap(this.props.groups
+    .filter(({ id }) => object.groups.includes(id))
+    .map(({ permissions }) => permissions)));
+
+    const userGroupPermissions = Object.values(this.props.permissions)
+    .filter(({ name }) => userGroupPermissionNames.includes(name));
+
+    const combinedPermissionItems = unique(flatMap([
+      userGroupPermissions,
+      userPermissionItems,
+    ]));
+
+    return (
+      <List
+        header={<div>Combined Permissions:</div>}
+        key="userCombinedPermissions"
+        bordered
+        dataSource={combinedPermissionItems}
+        className="userCombinedPermissionsContentContainer"
+        locale={{	emptyText: 'No Permissions' }}
+        renderItem={({ name, description }) => (<List.Item key={name} value={name}>{name} - {description}</List.Item>)}
       />
     );
   }
 
   getFields() {
     return {
+      combinedPermissions: {
+        renderEdit: this.renderCombinedPermissions.bind(this),
+        renderDisplay: this.renderCombinedPermissions.bind(this),
+      },
       permissions: {
         renderEdit: this.renderEditPermissions.bind(this),
         renderDisplay: this.renderDisplayPermissions.bind(this),

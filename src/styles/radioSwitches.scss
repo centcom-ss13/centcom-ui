@@ -9,6 +9,10 @@
 .donationTypeRadioSwitchContainer {
     width: 100%;
     height: 80px;
+
+    label {
+        user-select: none;
+    }
 }
 
 .container {

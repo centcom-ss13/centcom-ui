@@ -22,11 +22,9 @@ class UserPermissionsEditor extends React.Component {
 
   onChange(availableKeys) {
     const chosenKeys = this.getChosenKeysFromAvailableKeys(availableKeys);
-    console.log('chosenKeys', chosenKeys);
-    console.log('availableKeys', availableKeys);
     this.setState({
-      chosenKeys: chosenKeys,
-      availableKeys: availableKeys,
+      chosenKeys,
+      availableKeys,
     });
     this.props.setInputHandler('permissions', chosenKeys);
   }
@@ -42,15 +40,15 @@ class UserPermissionsEditor extends React.Component {
   }
 
   getAvailableKeys(chosenKeys = this.state.chosenKeys) {
-    return this.props.permissions
-    .map(({ id }) => id)
-    .filter((id) => !chosenKeys.includes(id));
+    return Object.values(this.props.permissions)
+    .map(({ name }) => name)
+    .filter((name) => !this.props.user.permissions.includes(name));
   }
 
   getChosenKeysFromAvailableKeys(availableKeys) {
-    return this.props.permissions
-    .map(({ id }) => id)
-    .filter((id) => !availableKeys.includes(id));
+    return Object.values(this.props.permissions)
+    .map(({ name }) => name)
+    .filter((name) => !availableKeys.includes(name));
   }
 
   isLoading() {
@@ -58,8 +56,8 @@ class UserPermissionsEditor extends React.Component {
   }
 
   render() {
-    const allPermissions = this.props.permissions
-    .map((permission) => ({ ...permission, key: permission.id }));
+    const allPermissions = Object.values(this.props.permissions)
+    .map((permission) => ({ ...permission, key: permission.name }));
 
     return (
       <div className="userPermissionsEditorContainer">
@@ -74,12 +72,16 @@ class UserPermissionsEditor extends React.Component {
           render={item => item.description}
           disabled={this.isLoading()}
           loading={this.isLoading()}
-          listStyle={{ width: '200px' }}
           locale={{
             notFoundContent: 'none',
             searchPlaceholder: 'Search...',
             itemUnit: '',
             itemsUnit: '',
+          }}
+          operations={['Remove Permission', 'Add Permission']}
+          listStyle={{
+            width: 400,
+            height: 270,
           }}
         />
       </div>

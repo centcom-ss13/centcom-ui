@@ -56,8 +56,8 @@ class GroupsEditor extends React.Component {
       return (<LoadingIndicator center/>);
     }
 
-    const groupPermissionItems = this.props.permissions
-    .filter(({ id }) => object.permissions.includes(id));
+    const groupPermissionItems = Object.values(this.props.permissions)
+    .filter(({ name }) => object.permissions.includes(name));
 
     return (
       <List

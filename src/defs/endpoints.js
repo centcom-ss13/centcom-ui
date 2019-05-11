@@ -100,6 +100,12 @@ export default {
         type: 'STRING',
         displayOrder: 3,
       },
+      combinedPermissions: {
+        type: 'CUSTOM',
+        custom: true,
+        name: 'Combined Permissions',
+        displayOrder: 7,
+      },
       permissions: {
         type: 'CUSTOM',
         name: 'Permissions:',
@@ -135,17 +141,6 @@ export default {
     fields: {
     },
   },
-  userPermissions: {
-    path: '/userPermissions',
-    name: 'user permissions',
-    singularDisplayName: 'user permission',
-    fields: {
-      permission_id: {},
-      user_id: {
-        filter: true,
-      },
-    },
-  },
   groups: {
     path: '/groups',
     name: 'groups',
@@ -179,15 +174,6 @@ export default {
       user_id: {
         filter: true,
       },
-    },
-  },
-  groupPermissions: {
-    path: '/groupPermissions',
-    name: 'group permissions',
-    singularDisplayName: 'group permission',
-    fields: {
-      permission_id: {},
-      group_id: {}
     },
   },
   jobs: {
