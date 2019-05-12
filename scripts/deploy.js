@@ -18,7 +18,7 @@ const s3 = new AWS.S3({
 });
 
 fs.readdirSync(filePath).forEach(subPath => {
-  const fullPath = `${filePath}\\${subPath}`;
+  const fullPath = `${filePath}/${subPath}`;
   const readStream = fs.createReadStream(fullPath);
   const params = {
     Bucket: bucketName,
