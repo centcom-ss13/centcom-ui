@@ -32,7 +32,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        build(job: 'centcom-ui-deploy', propagate: true, quietPeriod: 2)
+        build(job: 'centcom-ui-deploy', propagate: true, quietPeriod: 2, workspaceDir: '$WORKSPACE')
       }
     }
   }
