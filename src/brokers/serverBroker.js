@@ -7,7 +7,7 @@ import { promisify } from 'util';
 
 class ServerBroker {
   constructor() {
-    this.serverUrl = 'http://134.209.42.179'; //TODO: Temporary fix because I'm lazy
+    this.serverUrl = 'http://134.209.42.179:3000'; //TODO: Temporary fix because I'm lazy
 
     this.endpoints = Object.entries(endpointDefinitions)
     .map(([key, endpointDefinition]) => ({ [key]: new CrudEndpointSet(this, endpointDefinition) }))
