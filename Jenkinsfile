@@ -36,7 +36,7 @@ pipeline {
           job: 'centcom-ui-deploy',
           propagate: true,
           quietPeriod: 2,
-          parameters {
+          parameters: {
             workspaceDir: '$WORKSPACE'
           }
         )
