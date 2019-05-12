@@ -32,10 +32,6 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        nodejs('main') {
-          sh 'node scripts/deploy'
-        }
-
         build(job: 'centcom-ui-deploy', propagate: true, quietPeriod: 2)
       }
     }
