@@ -3,9 +3,7 @@ pipeline {
   stages {
     stage('Verify') {
       steps {
-        nodejs 'main'
-        sh '''npm ci
-npm run build'''
+        sh '''npm ci && npm run build'''
       }
     }
   }
