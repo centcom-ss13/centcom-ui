@@ -32,7 +32,9 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        echo 'I can\'t do that...'
+        nodejs('main') {
+          sh 'node scripts/deploy'
+        }
       }
     }
   }
