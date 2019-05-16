@@ -23,6 +23,7 @@ module.exports = {
           options: {
             plugins: [
               ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true }],
+              '@babel/plugin-proposal-class-properties'
             ],
           },
         }],
@@ -63,8 +64,7 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               plugins: [
-                ['import', { libraryName: "antd", libraryDirectory: "es", style: true }],
-                '@babel/plugin-proposal-class-properties'
+                ['import', { libraryName: "antd", libraryDirectory: "es", style: true }]
               ]
             },
           },
