@@ -63,7 +63,8 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               plugins: [
-                ['import', { libraryName: "antd", libraryDirectory: "es", style: true }]
+                ['import', { libraryName: "antd", libraryDirectory: "es", style: true }],
+                '@babel/plugin-proposal-class-properties'
               ]
             },
           },
