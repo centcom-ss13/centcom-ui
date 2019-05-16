@@ -1,6 +1,6 @@
 {
   "name": "@centcom/ui",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Front-end for the CentCom SS13 Management System",
   "main": "src/index.js",
   "scripts": {
