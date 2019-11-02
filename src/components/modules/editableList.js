@@ -6,13 +6,15 @@ import DB from '../../brokers/serverBroker';
 
 import endpointDefinitions from '../../defs/endpoints';
 import {sortNumericallyByKey} from '../../utils/sorters';
+import { connect } from "react-redux";
+import actions from "../../actions";
 
 const db = new DB();
 
 const { TextArea } = Input;
 const { Sider, Content } = Layout;
 
-export default class EditableList extends React.Component {
+class EditableList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -334,7 +336,8 @@ export default class EditableList extends React.Component {
   async create() {
     this.setState({ loading: true });
     const newObject = {
-      ...this.state.input,
+      input: this.state.input,
+      sender_id: this.props.currentUser && this.props.currentUser.id,
     };
 
     try {
@@ -423,3 +426,15 @@ export default class EditableList extends React.Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.app.currentUser,
+  }
+};
+
+const mapDispatchToProps = { ...actions };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(EditableList);
